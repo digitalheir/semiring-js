@@ -1,8 +1,3 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 (function (dependencies, factory) {
     if (typeof module === 'object' && typeof module.exports === 'object') {
         var v = factory(require, exports); if (v !== undefined) module.exports = v;
@@ -10,11 +5,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     else if (typeof define === 'function' && define.amd) {
         define(dependencies, factory);
     }
-})(["require", "exports", "../index"], function (require, exports) {
+})(["require", "exports", "../abstract-expression/arithmetic", "../abstract-expression/atom/number"], function (require, exports) {
     "use strict";
-    var index_1 = require("../index");
-    exports.ZERO = 0;
-    exports.ONE = 1;
+    var arithmetic_1 = require("../abstract-expression/arithmetic");
+    var number_1 = require("../abstract-expression/atom/number");
     function ADD(x, y) {
         if (x === 0)
             return y;
@@ -35,27 +29,29 @@ var __extends = (this && this.__extends) || function (d, b) {
             return x * y;
     }
     exports.MULTIPLY = MULTIPLY;
-    var FloatingPointSemiring = (function (_super) {
-        __extends(FloatingPointSemiring, _super);
-        function FloatingPointSemiring() {
-            var _this = _super.call(this, [index_1.Property.LeftSemiring,
-                index_1.Property.RightSemiring,
-                index_1.Property.Commutative]) || this;
-            _this.AdditiveIdentity = exports.ZERO;
-            _this.MultiplicativeIdentity = exports.ONE;
-            return _this;
-        }
-        FloatingPointSemiring.prototype.plus = function (x, y) {
-            return ADD(x, y);
-        };
-        ;
-        FloatingPointSemiring.prototype.times = function (x, y) {
-            return MULTIPLY(x, y);
-        };
-        ;
-        return FloatingPointSemiring;
-    }(index_1.Semiring));
+    exports.FloatingPointSemiring = {
+        AdditiveIdentity: 0,
+        MultiplicativeIdentity: 1,
+        plus: ADD,
+        times: MULTIPLY
+    };
+    function createMultiplication(x, y) {
+        return new arithmetic_1.Multiplication(x, y);
+    }
+    exports.createMultiplication = createMultiplication;
+    function createAddition(x, y) {
+        return new arithmetic_1.Addition(x, y);
+    }
+    exports.createAddition = createAddition;
+    var ZERO = new number_1.Num(0);
+    var ONE = new number_1.Num(1);
+    exports.FloatingPointTreeSemiring = {
+        AdditiveIdentity: ZERO,
+        MultiplicativeIdentity: ONE,
+        plus: createAddition,
+        times: createMultiplication
+    };
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = FloatingPointSemiring;
+    exports.default = exports.FloatingPointTreeSemiring;
 });
 //# sourceMappingURL=floating-point.js.map

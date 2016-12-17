@@ -1,12 +1,9 @@
 import { Semiring } from "../index";
+import { Expression } from "../abstract-expression/expression";
+import { Disjunction, Conjunction } from "../abstract-expression/boolean";
 export declare function OR(x: boolean, y: boolean): boolean;
 export declare function AND(x: boolean, y: boolean): boolean;
-export default class BooleanSemiring extends Semiring<boolean> {
-    AdditiveIdentity: boolean;
-    MultiplicativeIdentity: boolean;
-    constructor();
-    plus(x: boolean, y: boolean): boolean;
-    times(x: boolean, y: boolean): boolean;
-    and: (x: boolean, y: boolean) => boolean;
-    or: (x: boolean, y: boolean) => boolean;
-}
+export declare const BooleanSemiring: Semiring<boolean>;
+export declare function makeDisjunction(x: Expression<boolean>, y: Expression<boolean>): Disjunction;
+export declare function makeConjunction(x: Expression<boolean>, y: Expression<boolean>): Conjunction;
+export declare const BooleanExpressionSemiring: Semiring<Expression<boolean>>;

@@ -40,57 +40,59 @@ function isPropArray(x: Property[]|{[p: string]: boolean}): x is Property[] {
  * not checked for validity. So take careif you rely on these properties.
  *
  */
-export abstract class Semiring<Val> {
-    private properties: {[prop: string]: boolean};
-
+export interface Semiring<T> {
+    //properties: {[prop: string]: boolean};
     /**
      * Also known as 'one', because 'one' ⊗ x = x
      */
-    public abstract MultiplicativeIdentity: Val;
+    MultiplicativeIdentity: T;
     /**
      * Also known as 'zero', because 'zero' ⊕ x = x
      */
-    public abstract AdditiveIdentity: Val;
+    AdditiveIdentity: T;
 
+    /**
+     * ⊕
+     */
+    plus: (x: T, y: T) => T;
+
+    /**
+     * ⊗
+     */
+    times: (x: T, y: T) => T;
+
+    // /**
+    //  *
+    //  * @param properties
+    //  */
+    // constructor(properties: Property[]|{[prop: string]: boolean}) {
+    //     if (isPropArray(properties)) {
+    //         this.properties = {};
+    //         for (let prop of properties) {
+    //             let property: string = Property[prop];
+    //             this.properties[property] = true;
+    //         }
+    //     } else
+    //         this.properties = properties;
+    // }
     //
-    // TODO Implement some way of checking if passed properties are correct, true to falsify on a best effort basis if not able to do it automatically
+    // /**
+    //  *
+    //  * @returns properties dictionary
+    //  */
+    // public getProperties(): {[prop: string]: boolean} {
+    //     return this.properties;
+    // };
     //
-    /**
-     *
-     * @param properties
-     */
-    constructor(properties: Property[]|{[prop: string]: boolean}) {
-        if (isPropArray(properties)) {
-            this.properties = {};
-            for (let prop of properties) {
-                let property: string = Property[prop];
-                this.properties[property] = true;
-            }
-        } else
-            this.properties = properties;
-    }
-
-    /**
-     *
-     * @returns properties dictionary
-     */
-    public getProperties(): {[prop: string]: boolean} {
-        return this.properties;
-    };
-
-    /**
-     *
-     * @param prop
-     * @returns {boolean} Whether this semiring has given property
-     */
-    public hasProperty(prop: Property): boolean {
-        const propertyName: string = Property[prop];
-        let notHasProperty = !this.properties[propertyName];
-        return !notHasProperty;
-    };
-
-    public abstract plus(x: Val, y: Val): Val;
-
-    public abstract times(x: Val, y: Val): Val;
+    // /**
+    //  *
+    //  * @param prop
+    //  * @returns {boolean} Whether this semiring has given property
+    //  */
+    // public hasProperty(prop: Property): boolean {
+    //     const propertyName: string = Property[prop];
+    //     let notHasProperty = !this.properties[propertyName];
+    //     return !notHasProperty;
+    // };
 }
 export default Semiring;

@@ -1,8 +1,3 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 (function (dependencies, factory) {
     if (typeof module === 'object' && typeof module.exports === 'object') {
         var v = factory(require, exports); if (v !== undefined) module.exports = v;
@@ -10,9 +5,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     else if (typeof define === 'function' && define.amd) {
         define(dependencies, factory);
     }
-})(["require", "exports", "../index"], function (require, exports) {
+})(["require", "exports", "../abstract-expression/atom/boolean", "../abstract-expression/boolean"], function (require, exports) {
     "use strict";
-    var index_1 = require("../index");
+    var boolean_1 = require("../abstract-expression/atom/boolean");
+    var boolean_2 = require("../abstract-expression/boolean");
     function OR(x, y) {
         return x || y;
     }
@@ -21,30 +17,25 @@ var __extends = (this && this.__extends) || function (d, b) {
         return x && y;
     }
     exports.AND = AND;
-    var BooleanSemiring = (function (_super) {
-        __extends(BooleanSemiring, _super);
-        function BooleanSemiring() {
-            var _this = _super.call(this, [
-                index_1.Property.Idempotent,
-                index_1.Property.RightSemiring,
-                index_1.Property.LeftSemiring,
-                index_1.Property.Path
-            ]) || this;
-            _this.AdditiveIdentity = false;
-            _this.MultiplicativeIdentity = true;
-            _this.and = _this.times;
-            _this.or = _this.plus;
-            return _this;
-        }
-        BooleanSemiring.prototype.plus = function (x, y) {
-            return OR(x, y);
-        };
-        BooleanSemiring.prototype.times = function (x, y) {
-            return AND(x, y);
-        };
-        return BooleanSemiring;
-    }(index_1.Semiring));
-    Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = BooleanSemiring;
+    exports.BooleanSemiring = {
+        AdditiveIdentity: false,
+        MultiplicativeIdentity: true,
+        plus: OR,
+        times: AND,
+    };
+    function makeDisjunction(x, y) {
+        return new boolean_2.Disjunction(x, y);
+    }
+    exports.makeDisjunction = makeDisjunction;
+    function makeConjunction(x, y) {
+        return new boolean_2.Conjunction(x, y);
+    }
+    exports.makeConjunction = makeConjunction;
+    exports.BooleanExpressionSemiring = {
+        AdditiveIdentity: boolean_1.Bool.FALSE,
+        MultiplicativeIdentity: boolean_1.Bool.TRUE,
+        plus: makeDisjunction,
+        times: makeConjunction
+    };
 });
 //# sourceMappingURL=boolean.js.map

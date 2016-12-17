@@ -5,18 +5,10 @@ export declare enum Property {
     Commutative = 3,
     Path = 4,
 }
-export declare abstract class Semiring<Val> {
-    private properties;
-    abstract MultiplicativeIdentity: Val;
-    abstract AdditiveIdentity: Val;
-    constructor(properties: Property[] | {
-        [prop: string]: boolean;
-    });
-    getProperties(): {
-        [prop: string]: boolean;
-    };
-    hasProperty(prop: Property): boolean;
-    abstract plus(x: Val, y: Val): Val;
-    abstract times(x: Val, y: Val): Val;
+export interface Semiring<T> {
+    MultiplicativeIdentity: T;
+    AdditiveIdentity: T;
+    plus: (x: T, y: T) => T;
+    times: (x: T, y: T) => T;
 }
 export default Semiring;

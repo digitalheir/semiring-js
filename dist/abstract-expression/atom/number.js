@@ -13,18 +13,18 @@ var __extends = (this && this.__extends) || function (d, b) {
 })(["require", "exports", "./atom"], function (require, exports) {
     "use strict";
     var atom_1 = require("./atom");
-    var NumberLeaf = (function (_super) {
-        __extends(NumberLeaf, _super);
-        function NumberLeaf() {
+    var Num = (function (_super) {
+        __extends(Num, _super);
+        function Num() {
             return _super.apply(this, arguments) || this;
         }
-        NumberLeaf.prototype.toString = function (radix) {
+        Num.prototype.toString = function (radix) {
             return "{" + this.value.toString(radix) + "}";
         };
-        return NumberLeaf;
+        return Num;
     }(atom_1.Atom));
-    exports.NumberLeaf = NumberLeaf;
+    exports.Num = Num;
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = NumberLeaf;
+    exports.default = Num;
 });
 //# sourceMappingURL=number.js.map

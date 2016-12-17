@@ -1,0 +1,21 @@
+{
+  "name": "semiring",
+  "version": "0.1.0",
+  "description": "A simple library for defining semirings and evaluating expressions",
+  "main": "index.js",
+  "repository": "git@github.com:digitalheir/semiring-js.git",
+  "author": "Maarten Trompper",
+  "license": "MIT",
+  "devDependencies": {
+    "copyfiles": "^1.0.0",
+    "mocha": "^3.2.0",
+    "ncp": "^2.0.0",
+    "rimraf": "^2.5.4",
+    "typescript": "^2.1.4"
+  },
+  "scripts": {
+    "build:ts": "tsc",
+    "clean": "rimraf dist",
+    "build:cp": "copyfiles package.json readme.md dist/"
+  }
+}

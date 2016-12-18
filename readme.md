@@ -30,13 +30,17 @@ import {fromProbability, toProbability} from "semiring/semirings/log";
 import {Atom} from "semiring/abstract-expression/atom";
 import {Bool} from "semiring/abstract-expression/atom/boolean";
 
-console.log(1.0e-1000) // 0
 let minLogProb = fromProbability(1)
-for(let i=0;i<1000;i++)
+
+/**
+ * First use case: 1.0 * (0.1 * 0.1 ...a thousand times)
+ */
+for(let i=0;i<1000;i++) {
     minLogProb = LogSemiring.times(
         minLogProb,
         fromProbability(0.1)
     );
+}
 
 console.log(minLogProb); // -log(1.0e-1000) = 2302.58, comfortable :)
 console.log(toProbability(minLogProb)); // 1.0e-1000, rounded to 0 :(

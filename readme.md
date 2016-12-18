@@ -8,7 +8,11 @@
 
 # Semiring.js
 
-A simple library for working with semirings, useful for generalizing notions of 'plus' and 'times'.
+A simple library for working with ring-like algebraic structures. This library does not check properties of the defined structures, so you could actually define any algebraic structure that has some notion of 'plus' and 'times'.
+
+Written in Typescript, compiled to ES5 UMD modules.
+
+Note that the set `S` on which the operators apply is defined through generics, eg. `Semiring<number>`. If you don't use Typescript, this behaviour should come from your own logic.
 
 # Motivation
 I have two uses for this library:

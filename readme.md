@@ -1,4 +1,10 @@
 ![Build Status](https://img.shields.io/travis/digitalheir/semiring-js.svg)
+![Coverage](https://img.shields.io/coveralls/digitalheir/semiring-js.svg)
+![npm version](https://img.shields.io/npm/v/semiring-js.svg)
+![dev dependencies](https://img.shields.io/david/dev/digitalheir/bibliography-js.svg)
+![License](https://img.shields.io/npm/l/semiring-js.svg)
+[![Code Climate](https://codeclimate.com/github/digitalheir/semiring-js/badges/gpa.svg)](https://codeclimate.com/github/digitalheir/bibliography-js)
+
 
 # Semiring.js
 

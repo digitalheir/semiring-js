@@ -1,3 +1,5 @@
+![Build Status](https://img.shields.io/travis/digitalheir/semiring-js.svg)
+
 # Semiring.js
 
 A simple library for working with semirings, useful for generalizing notions of 'plus' and 'times'.

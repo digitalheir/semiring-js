@@ -1,4 +1,4 @@
-![Build Status](https://img.shields.io/travis/digitalheir/semiring-js.svg)
+![Build Status](https://travis-ci.org/digitalheir/semiring-js.svg?branch=master)
 ![Coverage](https://img.shields.io/coveralls/digitalheir/semiring-js.svg)
 ![npm version](https://img.shields.io/npm/v/semiring-js.svg)
 ![dev dependencies](https://img.shields.io/david/dev/digitalheir/bibliography-js.svg)

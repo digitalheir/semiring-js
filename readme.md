@@ -37,6 +37,9 @@ let minLogProb = LogSemiring.times(
 );
 console.log(toProbability(minLogProb)); // 0.15
 
+/**
+ * Second use case: create an expression tree with some two binary operators
+ */
 
 const deferrableBooleanSemiring = makeDeferrable(BooleanSemiring);
 const AND = deferrableBooleanSemiring.times;
@@ -44,11 +47,26 @@ const OR = deferrableBooleanSemiring.plus;
 
 const changeMyValue = new Atom(false);
 const TRUE = Bool.TRUE;
+const FALSE = Bool.FALSE;
 
-const expressionTree = AND(changeMyValue, TRUE);
+/**
+ *       OR
+ *    /      \
+ * FALSE     AND
+ *         /     \
+ *      {false}  TRUE
+ */
+const expressionTree = OR(FALSE, AND(changeMyValue, TRUE));
 
 console.log(expressionTree.resolve()); // > false
 changeMyValue.value = !changeMyValue.value; // Change expression tree
+/**
+ *       OR
+ *    /      \
+ * FALSE     AND
+ *         /     \
+ *      {true}  TRUE
+ */
 console.log(expressionTree.resolve()); // > true
 
 ````

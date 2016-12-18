@@ -1,8 +1,2 @@
-import { Expression } from "../expression";
-export declare abstract class Atom<T> implements Expression<T> {
-    private _value;
-    constructor(value: T);
-    value: T;
-    resolve(): T;
-    toString(): string;
-}
+import { Atom as AtomClass } from "../atom";
+export declare const Atom: typeof AtomClass;

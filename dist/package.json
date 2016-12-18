@@ -1,14 +1,13 @@
 {
   "name": "semiring",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "A simple library for defining semirings and evaluating expressions",
   "main": "index.js",
+  "types": "index.d.ts",
   "repository": "git@github.com:digitalheir/semiring-js.git",
   "author": "Maarten Trompper",
   "license": "MIT",
   "dependencies": {
-    "core-js": "^2.4.1",
-    "@types/core-js": "^0.9.35"
   },
   "devDependencies": {
     "@types/chai": "^3.4.34",
@@ -24,6 +23,7 @@
     "typescript": "^2.1.4"
   },
   "scripts": {
+    "build": "npm run clean && npm run build:ts && npm run build:cp",
     "build:ts": "tsc",
     "clean": "rimraf dist",
     "build:cp": "copyfiles package.json readme.md dist/",

@@ -1,14 +1,10 @@
-export declare enum Property {
-    RightSemiring = 0,
-    LeftSemiring = 1,
-    Idempotent = 2,
-    Commutative = 3,
-    Path = 4,
-}
-export interface Semiring<T> {
-    MultiplicativeIdentity: T;
-    AdditiveIdentity: T;
-    plus: (x: T, y: T) => T;
-    times: (x: T, y: T) => T;
-}
-export default Semiring;
+import { Expression } from "./abstract-expression/expression";
+import { Atom as AtomClass } from "./abstract-expression/atom";
+import { Semiring } from "./semiring";
+export declare function makeDeferrable<T>(semiring: Semiring<T>): Semiring<Expression<T>>;
+export declare const LogSemiring: Semiring<number>;
+export declare const BooleanSemiring: Semiring<boolean>;
+export declare const FloatingPointSemiring: Semiring<number>;
+export declare const fromProbabilityToMinusLog: (x: number) => number;
+export declare const toProbabilityFromMinusLog: (x: number) => number;
+export declare const Atom: typeof AtomClass;

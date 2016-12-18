@@ -1,7 +1,7 @@
-import {Semiring, Property} from "../index";
 import {Expression} from "../abstract-expression/expression";
 import {Multiplication, Addition} from "../abstract-expression/arithmetic";
 import {Num} from "../abstract-expression/atom/number";
+import {Semiring} from "../semiring";
 
 export function ADD(x: number, y: number): number {
     // console.log(x+" + "+y + " = "+(x+y));
@@ -22,8 +22,8 @@ export const FloatingPointSemiring: Semiring<number> = {
     // super([Property.LeftSemiring,
     //     Property.RightSemiring,
     //     Property.Commutative]);
-    AdditiveIdentity: 0,
-    MultiplicativeIdentity: 1,
+    additiveIdentity: 0,
+    multiplicativeIdentity: 1,
 
     plus: ADD,
     times: MULTIPLY
@@ -43,8 +43,8 @@ const ZERO = new Num(0);
 const ONE = new Num(1);
 
 export const FloatingPointTreeSemiring: Semiring<Expression<number>> = {
-    AdditiveIdentity: ZERO,
-    MultiplicativeIdentity: ONE,
+    additiveIdentity: ZERO,
+    multiplicativeIdentity: ONE,
 
     plus: createAddition,
     times: createMultiplication

@@ -9,8 +9,8 @@
     "use strict";
     var floating_point_1 = require("./floating-point");
     exports.LogSemiring = {
-        AdditiveIdentity: Infinity,
-        MultiplicativeIdentity: 0.0,
+        additiveIdentity: Infinity,
+        multiplicativeIdentity: 0.0,
         plus: function (x, y) {
             if (x === Infinity)
                 return y;
@@ -23,14 +23,14 @@
     };
     function fromProbability(x) {
         if (x > 1.0 || x < 0.0)
-            throw new Error("Can't have probabilities >1.0 or <0.0");
+            throw new Error("Can't have probabilities >1.0 or <0.0: " + x);
         return -Math.log(x);
     }
     exports.fromProbability = fromProbability;
     function toProbability(x) {
         var p = Math.exp(-x);
         if (p > 1.0 || p < 0.0)
-            throw new Error("Can't have probabilities >1.0 or <0.0");
+            throw new Error("Can't have probabilities >1.0 or <0.0: " + x);
         return p;
     }
     exports.toProbability = toProbability;

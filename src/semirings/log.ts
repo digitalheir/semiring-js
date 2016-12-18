@@ -1,5 +1,5 @@
-import {Semiring, Property} from "../index";
 import {MULTIPLY, ADD}  from "./floating-point";
+import {Semiring} from "../semiring";
 
 export const LogSemiring: Semiring<number> = {
     // constructor() {
@@ -7,8 +7,8 @@ export const LogSemiring: Semiring<number> = {
     //         Property.RightSemiring,
     //         Property.Commutative]);
     // }
-    AdditiveIdentity: Infinity,
-    MultiplicativeIdentity: 0.0,
+    additiveIdentity: Infinity,
+    multiplicativeIdentity: 0.0,
 
 
     plus: (x:number,y:number)=>{
@@ -23,13 +23,13 @@ export const LogSemiring: Semiring<number> = {
 };
 
 export function fromProbability(x: number): number {
-    if (x > 1.0 || x < 0.0) throw new Error("Can't have probabilities >1.0 or <0.0");
+    if (x > 1.0 || x < 0.0) throw new Error("Can't have probabilities >1.0 or <0.0: "+x);
     return -Math.log(x);
 }
 
 export function toProbability(x: number): number {
     let p = Math.exp(-x);
-    if (p > 1.0 || p < 0.0) throw new Error("Can't have probabilities >1.0 or <0.0");
+    if (p > 1.0 || p < 0.0) throw new Error("Can't have probabilities >1.0 or <0.0: "+x);
     return p;
 }
 

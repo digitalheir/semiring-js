@@ -1,7 +1,7 @@
-import {Semiring} from "../index";
 import {Bool} from "../abstract-expression/atom/boolean";
 import {Expression} from "../abstract-expression/expression";
 import {Disjunction, Conjunction} from "../abstract-expression/boolean";
+import {Semiring} from "../semiring";
 
 export function OR(x: boolean, y: boolean) {
     return x || y;
@@ -12,14 +12,11 @@ export function AND(x: boolean, y: boolean) {
 }
 
 export const BooleanSemiring: Semiring<boolean> = {
-    AdditiveIdentity:  false,
-    MultiplicativeIdentity:  true,
+    additiveIdentity:  false,
+    multiplicativeIdentity:  true,
     plus: OR,
     times: AND,
 };
-
-
-
 
 export function makeDisjunction(x: Expression<boolean>, y: Expression<boolean>): Disjunction {
     return new Disjunction(x, y);
@@ -30,8 +27,8 @@ export function makeConjunction(x: Expression<boolean>, y: Expression<boolean>):
 }
 
 export const BooleanExpressionSemiring: Semiring<Expression<boolean>> = {
-    AdditiveIdentity: Bool.FALSE,
-    MultiplicativeIdentity: Bool.TRUE,
+    additiveIdentity: Bool.FALSE,
+    multiplicativeIdentity: Bool.TRUE,
 
     plus: makeDisjunction,
     times: makeConjunction

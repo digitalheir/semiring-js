@@ -10,3 +10,10 @@ I have two uses for this library:
 ![Graph for f(x) = -log x](https://leibniz.cloudant.com/assets/_design/ddoc/graph%20for%20-log%20x.PNG)
 
 2. Sometimes I want to create an arithmetic expression of which values may change over time, i.e. pass around a value like `(x + 5) * 2`, and `x` is a pointer to a changing value. So I need an abstract expression tree, basically.
+
+# Usage
+````
+import {makeDeferrable} from "semiring";
+import {LogSemiring} from "semiring/semirings/log";
+
+````

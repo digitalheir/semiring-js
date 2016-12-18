@@ -5,30 +5,9 @@
     else if (typeof define === 'function' && define.amd) {
         define(dependencies, factory);
     }
-})(["require", "exports"], function (require, exports) {
+})(["require", "exports", "../atom"], function (require, exports) {
     "use strict";
-    var Atom = (function () {
-        function Atom(value) {
-            this._value = value;
-        }
-        Object.defineProperty(Atom.prototype, "value", {
-            get: function () {
-                return this._value;
-            },
-            set: function (value) {
-                this._value = value;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Atom.prototype.resolve = function () {
-            return this.value;
-        };
-        Atom.prototype.toString = function () {
-            return "{" + this._value.toString() + "}";
-        };
-        return Atom;
-    }());
-    exports.Atom = Atom;
+    var atom_1 = require("../atom");
+    exports.Atom = atom_1.Atom;
 });
 //# sourceMappingURL=atom.js.map

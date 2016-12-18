@@ -6,6 +6,9 @@ import {Bool} from "../src/abstract-expression/atom/boolean";
 import {BooleanSemiring, BooleanExpressionSemiring} from "../src/semirings/boolean";
 import {FloatingPointSemiring, FloatingPointTreeSemiring} from "../src/semirings/floating-point";
 import {Num} from "../src/abstract-expression/atom/number";
+import {makeDeferrable} from "../src/index";
+import {Atom} from "../src/abstract-expression/atom/atom";
+
 
 
 describe('FloatingPointSemiring', () => {
@@ -36,13 +39,13 @@ describe('LogSemiring', () => {
         let x = fromProbability(0.3);
         let xvalue = LogSemiring.times(
             x,
-            LogSemiring.MultiplicativeIdentity
+            LogSemiring.multiplicativeIdentity
         );
         expect(xvalue).to.equal(x);
 
         xvalue = LogSemiring.plus(
             x,
-            LogSemiring.AdditiveIdentity
+            LogSemiring.additiveIdentity
         );
         expect(xvalue).to.equal(x);
 
@@ -52,6 +55,18 @@ describe('LogSemiring', () => {
             fromProbability(0.5)
         );
         expect(toProbability(lvalue2)).to.be.above(0.799999999).and.below(0.800001);
+
+        const deferrableLogSemiring = makeDeferrable(LogSemiring);
+
+        let changeMe = new Atom(fromProbability(0.3));
+        const lvalue3 = deferrableLogSemiring.plus(
+            changeMe,
+            new Atom(fromProbability(0.5))
+        );
+
+        expect(toProbability(lvalue3.resolve())).to.be.above(0.799999999).and.below(0.800001);
+        changeMe.value = fromProbability(toProbability(changeMe.value) / 2);
+        expect(toProbability(lvalue3.resolve())).to.be.above(0.649999999).and.below(0.65000001);
     });
 });
 

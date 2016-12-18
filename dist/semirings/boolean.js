@@ -18,8 +18,8 @@
     }
     exports.AND = AND;
     exports.BooleanSemiring = {
-        AdditiveIdentity: false,
-        MultiplicativeIdentity: true,
+        additiveIdentity: false,
+        multiplicativeIdentity: true,
         plus: OR,
         times: AND,
     };
@@ -32,8 +32,8 @@
     }
     exports.makeConjunction = makeConjunction;
     exports.BooleanExpressionSemiring = {
-        AdditiveIdentity: boolean_1.Bool.FALSE,
-        MultiplicativeIdentity: boolean_1.Bool.TRUE,
+        additiveIdentity: boolean_1.Bool.FALSE,
+        multiplicativeIdentity: boolean_1.Bool.TRUE,
         plus: makeDisjunction,
         times: makeConjunction
     };

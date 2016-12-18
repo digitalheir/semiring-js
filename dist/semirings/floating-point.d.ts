@@ -1,6 +1,6 @@
-import { Semiring } from "../index";
 import { Expression } from "../abstract-expression/expression";
 import { Multiplication, Addition } from "../abstract-expression/arithmetic";
+import { Semiring } from "../semiring";
 export declare function ADD(x: number, y: number): number;
 export declare function MULTIPLY(x: number, y: number): number;
 export declare const FloatingPointSemiring: Semiring<number>;

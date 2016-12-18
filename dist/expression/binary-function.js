@@ -26,6 +26,24 @@ var __extends = (this && this.__extends) || function (d, b) {
         return BinaryFunction;
     }());
     exports.BinaryFunction = BinaryFunction;
+    var WrappedBinaryFunction = (function (_super) {
+        __extends(WrappedBinaryFunction, _super);
+        function WrappedBinaryFunction(left, right, f) {
+            var _this = _super.call(this, left, right) || this;
+            _this.f = f;
+            return _this;
+        }
+        WrappedBinaryFunction.prototype.resolve = function () {
+            return this.f(this.left.resolve(), this.right.resolve());
+        };
+        ;
+        return WrappedBinaryFunction;
+    }(BinaryFunction));
+    exports.WrappedBinaryFunction = WrappedBinaryFunction;
+    function wrapBinaryFunction(left, right, f) {
+        return new WrappedBinaryFunction(left, right, f);
+    }
+    exports.wrapBinaryFunction = wrapBinaryFunction;
     var PlusExpression = (function (_super) {
         __extends(PlusExpression, _super);
         function PlusExpression() {

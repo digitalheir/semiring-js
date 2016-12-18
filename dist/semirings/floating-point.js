@@ -30,8 +30,8 @@
     }
     exports.MULTIPLY = MULTIPLY;
     exports.FloatingPointSemiring = {
-        AdditiveIdentity: 0,
-        MultiplicativeIdentity: 1,
+        additiveIdentity: 0,
+        multiplicativeIdentity: 1,
         plus: ADD,
         times: MULTIPLY
     };
@@ -46,8 +46,8 @@
     var ZERO = new number_1.Num(0);
     var ONE = new number_1.Num(1);
     exports.FloatingPointTreeSemiring = {
-        AdditiveIdentity: ZERO,
-        MultiplicativeIdentity: ONE,
+        additiveIdentity: ZERO,
+        multiplicativeIdentity: ONE,
         plus: createAddition,
         times: createMultiplication
     };

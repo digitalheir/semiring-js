@@ -14,6 +14,13 @@ Written in Typescript, compiled to ES5 UMD modules.
 
 Note that the set `S` on which the operators apply is defined through generics, eg. `Semiring<number>`. If you don't use Typescript, this behaviour should come from your own logic.
 
+This library currently implements the following semirings:
+
+* Probability semiring
+* Log semiring
+* Tropical semiring
+* Boolean Semiring
+
 # Motivation
 I have two uses for this library:
 

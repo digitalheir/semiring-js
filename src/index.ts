@@ -6,6 +6,7 @@ import {Atom as AtomClass} from "./abstract-expression/atom";
 import {wrapBinaryFunction} from "./expression/binary-function";
 import {LogSemiring as ls, fromProbability, toProbability} from "./semirings/log";
 import {BooleanSemiring as bs} from "./semirings/boolean";
+import {TropicalSemiring as ts} from "./semirings/tropical";
 import {FloatingPointSemiring as fs} from "./semirings/floating-point";
 import {Semiring, Property} from "./semiring";
 
@@ -30,6 +31,7 @@ export function makeDeferrable<T>(semiring: Semiring<T>): Semiring<Expression<T>
 export const LogSemiring: Semiring<number> = ls;
 export const BooleanSemiring: Semiring<boolean> = bs;
 export const FloatingPointSemiring: Semiring<number> = fs;
+export const TropicalSemiring: Semiring<number> = ts;
 
 export const fromProbabilityToMinusLog: (x: number)=>number = fromProbability;
 export const toProbabilityFromMinusLog: (x: number)=>number = toProbability;

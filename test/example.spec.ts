@@ -1,12 +1,12 @@
-import {LogSemiring, toProbability, fromProbability} from "../src/semirings/log";
+import {toProbability, fromProbability} from "../src/semirings/log";
 
 //import * as Mocha from 'mocha'
 import {expect} from 'chai';
 import {Bool} from "../src/abstract-expression/atom/boolean";
-import {BooleanSemiring, BooleanExpressionSemiring} from "../src/semirings/boolean";
+import { BooleanExpressionSemiring} from "../src/semirings/boolean";
 import {FloatingPointSemiring, FloatingPointTreeSemiring} from "../src/semirings/floating-point";
 import {Num} from "../src/abstract-expression/atom/number";
-import {makeDeferrable} from "../src/index";
+import {makeDeferrable, TropicalSemiring, LogSemiring, BooleanSemiring} from "../src/index";
 import {Atom} from "../src/abstract-expression/atom/atom";
 
 
@@ -28,6 +28,7 @@ describe('FloatingPointSemiring', () => {
         expect(times.resolve()).to.equal(300);
     });
 });
+
 describe('LogSemiring', () => {
     it('should calculate probabilties', () => {
         const lvalue = LogSemiring.times(
@@ -67,6 +68,43 @@ describe('LogSemiring', () => {
         expect(toProbability(lvalue3.resolve())).to.be.above(0.799999999).and.below(0.800001);
         changeMe.value = fromProbability(toProbability(changeMe.value) / 2);
         expect(toProbability(lvalue3.resolve())).to.be.above(0.649999999).and.below(0.65000001);
+    });
+});
+
+
+describe('TropicalSemiring', () => {
+    
+    it('should calculate probabilties', () => {
+        expect(TropicalSemiring.multiplicativeIdentity).to.equal(0.0);
+        expect(TropicalSemiring.additiveIdentity).to.equal(Infinity);
+        
+        expect(TropicalSemiring.times(
+            0.3,
+            0.5
+        )).to.equal(0.3 + 0.5);
+        expect(TropicalSemiring.times(
+            Infinity,
+            0.5
+        )).to.equal(Infinity);
+        expect(TropicalSemiring.times(
+            0,
+            0.5
+        )).to.equal(0.5);
+
+        expect(TropicalSemiring.plus(
+            0.3,
+            0.5
+        )).to.equal(0.3);
+        
+        expect(TropicalSemiring.plus(
+            0.3,
+            Infinity
+        )).to.equal(0.3);
+        
+        expect(TropicalSemiring.plus(
+            0.0,
+            Infinity
+        )).to.equal(0);
     });
 });
 

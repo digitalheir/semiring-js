@@ -5,6 +5,7 @@ export declare function makeDeferrable<T>(semiring: Semiring<T>): Semiring<Expre
 export declare const LogSemiring: Semiring<number>;
 export declare const BooleanSemiring: Semiring<boolean>;
 export declare const FloatingPointSemiring: Semiring<number>;
+export declare const TropicalSemiring: Semiring<number>;
 export declare const fromProbabilityToMinusLog: (x: number) => number;
 export declare const toProbabilityFromMinusLog: (x: number) => number;
 export declare const Atom: typeof AtomClass;

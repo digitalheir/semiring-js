@@ -5,12 +5,13 @@
     else if (typeof define === 'function' && define.amd) {
         define(dependencies, factory);
     }
-})(["require", "exports", "./abstract-expression/atom", "./expression/binary-function", "./semirings/log", "./semirings/boolean", "./semirings/floating-point"], function (require, exports) {
+})(["require", "exports", "./abstract-expression/atom", "./expression/binary-function", "./semirings/log", "./semirings/boolean", "./semirings/tropical", "./semirings/floating-point"], function (require, exports) {
     "use strict";
     var atom_1 = require("./abstract-expression/atom");
     var binary_function_1 = require("./expression/binary-function");
     var log_1 = require("./semirings/log");
     var boolean_1 = require("./semirings/boolean");
+    var tropical_1 = require("./semirings/tropical");
     var floating_point_1 = require("./semirings/floating-point");
     function isPropArray(x) {
         return Object.prototype.toString.call(x) === '[object Array]';
@@ -27,6 +28,7 @@
     exports.LogSemiring = log_1.LogSemiring;
     exports.BooleanSemiring = boolean_1.BooleanSemiring;
     exports.FloatingPointSemiring = floating_point_1.FloatingPointSemiring;
+    exports.TropicalSemiring = tropical_1.TropicalSemiring;
     exports.fromProbabilityToMinusLog = log_1.fromProbability;
     exports.toProbabilityFromMinusLog = log_1.toProbability;
     exports.Atom = atom_1.Atom;

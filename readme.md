@@ -1,5 +1,5 @@
 ![Build Status](https://travis-ci.org/digitalheir/semiring-js.svg?branch=master)
-![Coverage](https://img.shields.io/coveralls/digitalheir/semiring-js.svg)
+[![Coverage Status](https://coveralls.io/repos/github/digitalheir/semiring-js/badge.svg?branch=master)](https://coveralls.io/github/digitalheir/semiring-js?branch=master)
 [![npm version](https://badge.fury.io/js/semiring.svg)](https://badge.fury.io/js/semiring)
 ![License](https://img.shields.io/npm/l/semiring.svg)
 [![Code Climate](https://codeclimate.com/github/digitalheir/semiring-js/badges/gpa.svg)](https://codeclimate.com/github/digitalheir/bibliography-js)

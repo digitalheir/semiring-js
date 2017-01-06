@@ -8,9 +8,9 @@
 
 # Semiring.js
 
-A simple library for working with ring-like algebraic structures that implements some common semirings. This library does not check properties of the defined structures, so you could actually define any algebraic structure that has some notion of 'plus' and 'times'. It is just a simple utility library I needed for my own purposes: I am not trying to implement all abstract algebra in here.
+A simple library for working with ring-like algebraic structures in Javascript that implements some common semirings. This library does not check properties of the defined structures, so you could actually define any algebraic structure that has some notion of 'plus' and 'times'. It is just a simple utility library I needed for my own purposes: I am not trying to implement all abstract algebra in here.
 
-Written in Typescript, compiled to ES5 UMD modules.
+Written in Typescript, compiled to vulgar Javascript (ES5 UMD modules).
 
 Note that the set `S` on which the operators apply is defined through generics, eg. `Semiring<number>`. If you don't use Typescript, this behaviour should come from your own logic.
 
@@ -22,9 +22,10 @@ This library currently implements the following semirings:
 * Boolean Semiring
 
 # Motivation
+
 I have two uses for this library:
 
-* I want to make a long probabilistic computation 0.1 * 0.1 * ... * 0.1, and at some point floating point arithmetic will be unable to represent a number so small, leading to arithmetic underflow. To counter, we use the Log semiring which holds the `-log` value of the probability. So it maps the numbers between 0 and 1 to the numbers between infinity and zero, skewed towards lower probabilities:
+* I want to make a long probabilistic computation 0.1 * 0.1 * ... * 0.1, and at some point Javascript's floating point arithmetic will be unable to represent a number so small, leading to arithmetic underflow. To counter, we use the Log semiring which holds the `-log` value of the probability. So it maps the numbers between 0 and 1 to the numbers between infinity and zero, skewed towards lower probabilities:
 #### Graph plot of f(x) = -log(x)
 ![Graph for f(x) = -log x](https://leibniz.cloudant.com/assets/_design/ddoc/graph%20for%20-log%20x.PNG)
 

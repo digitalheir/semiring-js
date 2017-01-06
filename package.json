@@ -5,28 +5,30 @@
   "types": "index.d.ts",
   "repository": "git@github.com:digitalheir/semiring-js.git",
   "author": "Maarten Trompper",
-  "private": true, 
+  "private": true,
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.33",
-    "@types/sinon": "^1.16.33",
     "chai": "^3.5.0",
     "copyfiles": "^1.0.0",
     "mocha": "^3.2.0",
-    "ncp": "^2.0.0",
     "rimraf": "^2.5.4",
-    "sinon": "^1.17.6",
     "ts-node": "^1.7.2",
     "typescript": "^2.1.4"
   },
+  "config": {
+    "blanket": {
+      "pattern": "src"
+    }
+  },
+  "//": "NODE_ENV=test YOURPACKAGE_COVERAGE=1 ",
   "scripts": {
     "build": "npm run clean && npm run build:ts && npm run build:cp && node write-package.js",
     "build:ts": "tsc",
     "clean": "rimraf dist",
     "build:cp": "copyfiles .npmignore readme.md dist/",
-    "test": "mocha -r ts-node/register test/**/*.spec.ts"
+    "test": "mocha  -r ts-node/register --ui bdd -R spec test/**/*.spec.ts "
   }
 }

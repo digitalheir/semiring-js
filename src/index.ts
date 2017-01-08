@@ -105,10 +105,9 @@ export enum Property {
 }
 
 
-//noinspection JSUnusedLocalSymbols
-function isPropArray(x: Property[]|{[p: string]: boolean}): x is Property[] {
-    return Object.prototype.toString.call(x) === "[object Array]";
-}
+// function isPropArray(x: Property[]|{[p: string]: boolean}): x is Property[] {
+//     return Object.prototype.toString.call(x) === "[object Array]";
+// }
 
 /**
  * Wrap given semiring objects of type T in an Expression; times and plus will will return TimesExpression<T> and PlusExpression<T> objects respectively. This is useful forrespresting computations as an expression tree, and you may interchange constituent node values (eg. x+3, and set the value x later).

@@ -31,10 +31,15 @@ I have two uses for this library:
 
 # Usage
 ````js
-import {LogSemiring, makeDeferrable, BooleanSemiring} from "semiring";
-import {fromProbability, toProbability} from "semiring/semirings/log";
-import {Atom} from "semiring/abstract-expression/atom";
-import {Bool} from "semiring/abstract-expression/atom/boolean";
+import {
+    LogSemiring,
+    makeDeferrable,
+    BooleanSemiring,
+    fromProbabilityToMinusLog as fromProbability,
+    toProbabilityFromMinusLog as toProbability,
+    Atom,
+    Bool
+} from "semiring";
 
 let minLogProb = fromProbability(1)
 

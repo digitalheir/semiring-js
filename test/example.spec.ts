@@ -1,13 +1,16 @@
-import {toProbability, fromProbability} from "../src/semirings/log";
-
-//import * as Mocha from 'mocha'
+import {
+    LogSemiring,
+    makeDeferrable,
+    BooleanSemiring,
+    fromProbabilityToMinusLog as fromProbability,
+    toProbabilityFromMinusLog as toProbability,
+    Atom,
+    Bool, Num, FloatingPointSemiring, TropicalSemiring
+} from "../src/index";
 import {expect} from 'chai';
-import {Bool} from "../src/abstract-expression/atom/boolean";
-import { BooleanExpressionSemiring} from "../src/semirings/boolean";
-import {FloatingPointSemiring, FloatingPointTreeSemiring} from "../src/semirings/floating-point";
-import {Num} from "../src/abstract-expression/atom/number";
-import {makeDeferrable, TropicalSemiring, LogSemiring, BooleanSemiring} from "../src/index";
-import {Atom} from "../src/abstract-expression/atom/atom";
+
+import * as Mocha from 'mocha'
+const BooleanExpressionSemiring = makeDeferrable(BooleanSemiring);
 
 
 
@@ -19,7 +22,7 @@ describe('FloatingPointSemiring', () => {
     });
     it('should calculate values - deferred', () => {
         let changeMe = new Num(5);
-        const times = FloatingPointTreeSemiring.times(
+        const times = makeDeferrable(FloatingPointSemiring).times(
             changeMe,
             new Num(30)
         );

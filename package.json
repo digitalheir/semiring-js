@@ -1,6 +1,6 @@
 {
   "name": "semiring-src",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "index.js",
   "types": "index.d.ts",
   "repository": "git@github.com:digitalheir/semiring-js.git",

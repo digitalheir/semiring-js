@@ -3,6 +3,8 @@
  */
 import {Expression} from "./abstract-expression/expression";
 import {Atom as AtomClass} from "./abstract-expression/atom";
+import {Bool as BoolClass} from "./abstract-expression/atom/boolean";
+import {Num as NumClass} from "./abstract-expression/atom/number";
 import {wrapBinaryFunction} from "./expression/binary-function";
 import {LogSemiring as ls, fromProbability, toProbability} from "./semirings/log";
 import {BooleanSemiring as bs} from "./semirings/boolean";
@@ -33,7 +35,10 @@ export const BooleanSemiring: Semiring<boolean> = bs;
 export const FloatingPointSemiring: Semiring<number> = fs;
 export const TropicalSemiring: Semiring<number> = ts;
 
-export const fromProbabilityToMinusLog: (x: number)=>number = fromProbability;
-export const toProbabilityFromMinusLog: (x: number)=>number = toProbability;
+export const Bool = BoolClass;
+export const Num = NumClass;
+
+export const fromProbabilityToMinusLog: (x: number) => number = fromProbability;
+export const toProbabilityFromMinusLog: (x: number) => number = toProbability;
 
 export const Atom = AtomClass;

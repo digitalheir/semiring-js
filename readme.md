@@ -1,5 +1,5 @@
 ![Build Status](https://travis-ci.org/digitalheir/semiring-js.svg?branch=master)
-[![npm version](https://badge.fury.io/js/semiring.svg)](https://badge.fury.io/js/semiring)
+[![npm version](https://badge.fury.io/js/semiring.svg)](https://www.npmjs.com/package/semiring)
 ![License](https://img.shields.io/npm/l/semiring.svg)
 [![Code Climate](https://codeclimate.com/github/digitalheir/semiring-js/badges/gpa.svg)](https://codeclimate.com/github/digitalheir/bibliography-js)
 
@@ -8,7 +8,7 @@
 
 A simple library for working with ring-like algebraic structures in Javascript that implements some common semirings. This library does not check properties of the defined structures, so you could actually define any algebraic structure that has some notion of 'plus' and 'times'. It is just a simple utility library I needed for my own purposes: I am not trying to implement all abstract algebra in here.
 
-Written in Typescript, compiled to vulgar Javascript (ES5 UMD modules).
+Written in Typescript, published as a [commonjs modules on NPM](https://www.npmjs.com/package/semiring) and a [single-file minified UMD module on GitHub](https://github.com/digitalheir/semiring-js/releases) in vulgar ES5.
 
 Note that the set `S` on which the operators apply is defined through generics, eg. `Semiring<number>`. If you don't use Typescript, this behaviour should come from your own logic.
 

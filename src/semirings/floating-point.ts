@@ -1,7 +1,7 @@
 import {Expression} from "../abstract-expression/expression";
 import {Multiplication, Addition} from "../abstract-expression/arithmetic";
 import {Num} from "../abstract-expression/atom/number";
-import {Semiring} from "../semiring";
+import {Semiring} from "../index";
 
 export function ADD(x: number, y: number): number {
     // console.log(x+" + "+y + " = "+(x+y));

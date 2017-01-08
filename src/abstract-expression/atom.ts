@@ -1,7 +1,7 @@
 import {Expression} from "./expression";
 
-function isNumber(x:any): x is number {
-    return typeof x === 'number';
+function isNumber(x: any): x is number {
+    return typeof x === "number";
 }
 
 export class Atom<T> implements Expression<T> {

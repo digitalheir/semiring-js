@@ -21,9 +21,9 @@ export abstract class BinaryFunction<T> implements Expression<T> {
 }
 
 export class WrappedBinaryFunction<T> extends BinaryFunction<T> {
-    private f: (x: T, y: T)=>T;
+    private f: (x: T, y: T) => T;
 
-    constructor(left: Expression<T>, right: Expression<T>, f: (x: T, y: T)=>T) {
+    constructor(left: Expression<T>, right: Expression<T>, f: (x: T, y: T) => T) {
         super(left, right);
         this.f = f;
     }
@@ -33,7 +33,7 @@ export class WrappedBinaryFunction<T> extends BinaryFunction<T> {
     };
 }
 
-export function wrapBinaryFunction<T>(left: Expression<T>, right: Expression<T>, f: (x: T, y: T)=>T): WrappedBinaryFunction<T> {
+export function wrapBinaryFunction<T>(left: Expression<T>, right: Expression<T>, f: (x: T, y: T) => T): WrappedBinaryFunction<T> {
     return new WrappedBinaryFunction(left, right, f);
 }
 

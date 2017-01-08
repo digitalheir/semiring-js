@@ -1,7 +1,7 @@
 import {Bool} from "../abstract-expression/atom/boolean";
 import {Expression} from "../abstract-expression/expression";
 import {Disjunction, Conjunction} from "../abstract-expression/boolean";
-import {Semiring} from "../semiring";
+import {Semiring} from "../index";
 
 export function OR(x: boolean, y: boolean) {
     return x || y;

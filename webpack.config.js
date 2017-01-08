@@ -36,13 +36,12 @@ var config = {
     },
     module: {
         rules: [
-            //TODO
-            // {
-            //     enforce: 'pre',
-            //     test: /\.tsx?$/,
-            //     loader: 'tslint-loader',
-            //     exclude: /node_modules/
-            // },
+            {
+                enforce: 'pre',
+                test: /\.tsx?$/,
+                loader: 'tslint-loader',
+                exclude: /node_modules/
+            },
             {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',

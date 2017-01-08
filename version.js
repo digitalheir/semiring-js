@@ -1,1 +1,1 @@
-exports.default = "1.2.2";
+exports.default = "1.2.3";

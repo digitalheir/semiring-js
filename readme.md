@@ -92,7 +92,7 @@ console.log(expressionTree.resolve()); // > true
 ````
 
 ## Probability semiring
-The common notion of calculation probabilties.
+This semiring implements common notion of calculating probabilties.
 
 |Element set|⊕|⊗|0̅|1̅|
 |---|---|---|---|---|

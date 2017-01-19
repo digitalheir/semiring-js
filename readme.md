@@ -102,17 +102,8 @@ For example: `0.5 ⊗ 1.0 = 0.5`, `0.2 ⊕ 0.7 = 0.9`.
 
 ````js
 import {
-    ProbabilitySemiring,
-    makeDeferrable, Atom
+    ProbabilitySemiring
 } from "semiring";
 
 console.log(ProbabilitySemiring.times(0.5, 0.5)); // 0.25
-
-// You can also make the semiring so that it returns expression trees
-const deferrableSemiring = makeDeferrable(ProbabilitySemiring);
-const changeMe = new Atom(0.5);
-ProbabilitySemiring.times(new Atom(0.1), changeMe)
-console.log(expressionTree.resolve()); // 0.05
-changeMe.value = 1.0;
-console.log(expressionTree.resolve()); // 0.1
 ```

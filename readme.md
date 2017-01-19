@@ -96,7 +96,7 @@ This semiring implements common notion of calculating probabilties.
 
 |Element set|⊕|⊗|0̅|1̅|
 |---|---|---|---|---|
-|Positive real numbers (**R**+)|Common +|Common *|0.0|1.0|
+|Positive real numbers (**R**+)|+|*|0.0|1.0|
 
 For example: `0.5 * 1.0 = 0.5`, `0.2 + 0.7 = 0.9`.
 

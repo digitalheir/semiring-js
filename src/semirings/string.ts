@@ -1,43 +1,43 @@
-import {Set, EmptySet, Contains, Intersection, Product, Equals} from "../set";
+import {Equals, Product, Union} from "../set";
 import {Semiring} from "../index";
 
 export class FormalLanguage {
-    readonly alphabet: Set;
-    readonly content: Set;
+    readonly alphabet: Set<any>;
+    readonly content: Set< {} | Array<any>>;
 
-    constructor (alphabet: Set, ?content: Set) {
-	this.alphabet = alphabet;
-	this.content = content || EmptySet;
+    constructor(alphabet: Set<any>, content?: Set<Array<any>>) {
+        this.alphabet = alphabet;
+        this.content = content || new Set();
     };
 }
 
-export function StringSemiring(S: Set) {
-    var stringSemiring: Semiring<FormalLanguage>{
-	additiveIdentity: new FormalLanguage(S),
-	multiplicativIdentity: new FormalLanguage(S, new Set(EmptySet)),
-	plus: LanguageUnion,
-	times: Concatenation 
-    }	
+export function StringSemiring(S: Set<any>): Semiring<FormalLanguage> {
+    return {
+        additiveIdentity: new FormalLanguage(S),
+        multiplicativeIdentity: new FormalLanguage(S, new Set([])),
+        plus: LanguageUnion,
+        times: Concatenation
+    };
 }
 
-export function Concatenation(FirstLang: FormalLanguage, secondLang: FormalLanguage) {
-    if (!Compatible(firstLang, secondLang)){
-        throw new Error("Arguments do not have compatible alphabets.")	
+export function Concatenation(firstLang: FormalLanguage, secondLang: FormalLanguage) {
+    if (!Compatible(firstLang, secondLang)) {
+        throw new Error("Arguments do not have compatible alphabets.");
     }
 
-    var alph = firstLang.alphabet,
-	content = Product(firstLang, secondLang, Concat);
+    const alph = firstLang.alphabet,
+        content = Product(firstLang.content, secondLang.content, Array.concat);
     return new FormalLanguage(alph, content);
 }
 
-export function LanguageUnion(FirstLang: FormalLanguage, secondLang: FormalLanguage) {
-    if (!Compatible(firstLang, secondLang)){
-        throw new Error("Arguments do not have compatible alphabets.")	
+export function LanguageUnion(firstLang: FormalLanguage, secondLang: FormalLanguage) {
+    if (!Compatible(firstLang, secondLang)) {
+        throw new Error("Arguments do not have compatible alphabets.");
     }
 
-    return new FormalLanguage(firstlang.alphabet, Union(firstLang.content, secondLang.content));  
+    return new FormalLanguage(firstLang.alphabet, Union(firstLang.content, secondLang.content));
 }
 
-export function Compatible(FirstLang: FormalLanguage, secondLang: FormalLanguage){
-    return Equals(firstLang.alphabet, secondLang.alphabet); 
+export function Compatible(firstLang: FormalLanguage, secondLang: FormalLanguage) {
+    return Equals(firstLang.alphabet, secondLang.alphabet);
 }

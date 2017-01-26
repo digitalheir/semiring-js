@@ -2,12 +2,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "declaration": true,
-    "module": "commonjs",
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": false,
-    "target": "es5",
+    "target": "es6",
     "outDir": "dist"
   },
   "include": [

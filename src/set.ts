@@ -1,5 +1,3 @@
-import {Set} from "core-js/es6";
-
 export function Contains(firstSet: Set<any>, secondSet: Set<any>) {
     for (const value in firstSet) {
         if (secondSet.has(value)) {
@@ -33,21 +31,20 @@ export function Union(firstSet: Set<any>, secondSet: Set<any>) {
     });
 
     return returnSet;
-};
+}
 
 export function Equals(firstSet: Set<any>, secondSet: Set<any>) {
-    const tempSet: Set<any> = new Set(secondSet);
+    let sizeOfSecondSet: number = secondSet.size;
     firstSet.forEach(function (value) {
         if (!secondSet.has(value)) {
             return false;
         }
 
-        tempSet.delete(value);
+        sizeOfSecondSet--;
     });
 
-    return tempSet.size > 0;
-};
-
+    return sizeOfSecondSet > 0;
+}
 export function Product(firstSet: Set<any>, secondSet: Set<any>, combine: (x: any, y: any) => any) {
     const returnSet: Set<any> = new Set();
     firstSet.forEach(function (firstValue) {
@@ -56,4 +53,4 @@ export function Product(firstSet: Set<any>, secondSet: Set<any>, combine: (x: an
         });
     });
     return returnSet;
-};
+}

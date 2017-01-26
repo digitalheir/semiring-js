@@ -1,3 +1,4 @@
+///<reference path="semirings/string.ts"/>
 /**
  * Properties that semirings might have
  */
@@ -10,7 +11,7 @@ import {LogSemiring as ls, fromProbability, toProbability} from "./semirings/log
 import {BooleanSemiring as bs} from "./semirings/boolean";
 import {TropicalSemiring as ts} from "./semirings/tropical";
 import {FloatingPointSemiring as fs} from "./semirings/floating-point";
-
+import {StringSemiring as ss, FormalLanguage} from "./semirings/string";
 /**
  * Semiring defined on objects of type T.
  *
@@ -126,6 +127,7 @@ export const LogSemiring: Semiring<number> = ls;
 export const BooleanSemiring: Semiring<boolean> = bs;
 export const FloatingPointSemiring: Semiring<number> = fs;
 export const TropicalSemiring: Semiring<number> = ts;
+export const StringSemiringGenerator: (S: Set<any>) => Semiring<FormalLanguage> = ss;
 
 export const Bool = BoolClass;
 export const Num = NumClass;

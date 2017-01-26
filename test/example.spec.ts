@@ -2,19 +2,19 @@ import {
     LogSemiring,
     makeDeferrable,
     BooleanSemiring,
+    StringSemiringGenerator,
     fromProbabilityToMinusLog as fromProbability,
     toProbabilityFromMinusLog as toProbability,
     Atom,
-    Bool, Num, FloatingPointSemiring, TropicalSemiring
+    Bool, Num, FloatingPointSemiring, TropicalSemiring, Semiring
 } from "../src/index";
-import {expect} from 'chai';
+import {expect} from "chai";
+import {FormalLanguage} from "../src/semirings/string";
 
-import * as Mocha from 'mocha'
 const BooleanExpressionSemiring = makeDeferrable(BooleanSemiring);
 
 
-
-describe('FloatingPointSemiring', () => {
+describe("FloatingPointSemiring", () => {
     it('should calculate values', () => {
         expect(
             FloatingPointSemiring.times(2, 3)
@@ -116,6 +116,47 @@ describe('BooleanSemiring', () => {
         expect(
             BooleanSemiring.times(true, true)
         ).to.equal(true);
+    });
+
+    it('should calculate expressions correctly', () => {
+        expect(
+            BooleanExpressionSemiring.times(Bool.TRUE, Bool.TRUE)
+                .resolve()
+                .valueOf()
+        ).to.equal(true);
+
+        expect(
+            BooleanExpressionSemiring.plus(Bool.TRUE, Bool.FALSE)
+                .resolve()
+                .valueOf()
+        ).to.equal(true);
+
+        expect(
+            BooleanExpressionSemiring.times(Bool.TRUE, Bool.FALSE)
+                .resolve()
+                .valueOf()
+        ).to.equal(false);
+
+        expect(
+            BooleanExpressionSemiring.plus(Bool.FALSE, Bool.FALSE)
+                .resolve()
+                .valueOf()
+        ).to.equal(false);
+
+
+        // console.log(bsr.hasProperty(Property.Idempotent));
+        // console.log(bsr.hasProperty(Property.Commutative));
+    });
+});
+
+let alph: Set<string> = new Set(['a', 'b', 'c', 'd', 'e']);
+let StringSemiring: Semiring<FormalLanguage> = StringSemiringGenerator(alph);
+describe("StringSemiring", () => {
+    it("", () => {
+        expect(
+            .times(true, true);;;
+        ).
+        to.equal(true);
     });
 
     it('should calculate expressions correctly', () => {

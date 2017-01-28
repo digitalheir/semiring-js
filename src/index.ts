@@ -1,20 +1,16 @@
-/**
- * Properties that semirings might have
- */
 import {Expression} from "./abstract-expression/expression";
 import {wrapBinaryFunction} from "./expression/binary-function";
 import {LogSemiring as ls, fromProbability, toProbability} from "./semirings/log";
 import {Atom} from "./abstract-expression/atom";
-import {FormalLanguage, StringSemiring} from "./semirings/string";
 
 export * from "./abstract-expression/expression";
 export * from "./abstract-expression/atom";
 export * from "./abstract-expression/identity";
 export * from "./abstract-expression/atom/boolean";
 export * from "./abstract-expression/atom/number";
-export *  from "./semirings/boolean";
-export *  from "./semirings/tropical";
-export *  from "./semirings/floating-point";
+export * from "./semirings/boolean";
+export * from "./semirings/tropical";
+export * from "./semirings/floating-point";
 export * from "./semirings/string";
 
 
@@ -88,30 +84,29 @@ export interface Semiring<T> {
 
 export default Semiring;
 
-export enum Property {
-    /**
-     * If times right-distributes wrt plus
-     */
-    RightSemiring,
-        /**
-         * If times left-distributes wrt plus
-         */
-    LeftSemiring,
-        /**
-         * An idempotent semiring is one whose addition is idempotent: a + a = a, for all a
-         */
-    Idempotent,
-        /**
-         * A commutative semiring is one whose multiplication is commutative.
-         */
-    Commutative,
-        /**
-         * ∀ a, b: a ⊕ b = a or a ⊕ b = b
-         */
-    Path
-}
-
-
+// export enum Property {
+//     /**
+//      * If times right-distributes wrt plus
+//      */
+//     RightSemiring,
+//         /**
+//          * If times left-distributes wrt plus
+//          */
+//     LeftSemiring,
+//         /**
+//          * An idempotent semiring is one whose addition is idempotent: a + a = a, for all a
+//          */
+//     Idempotent,
+//         /**
+//          * A commutative semiring is one whose multiplication is commutative.
+//          */
+//     Commutative,
+//         /**
+//          * ∀ a, b: a ⊕ b = a or a ⊕ b = b
+//          */
+//     Path
+// }
+//
 // function isPropArray(x: Property[]|{[p: string]: boolean}): x is Property[] {
 //     return Object.prototype.toString.call(x) === "[object Array]";
 // }
@@ -132,5 +127,4 @@ export function makeDeferrable<T>(semiring: Semiring<T>): Semiring<Expression<T>
 export const fromProbabilityToMinusLog: (x: number) => number = fromProbability;
 export const toProbabilityFromMinusLog: (x: number) => number = toProbability;
 
-export const StringSemiringGenerator: (S: Set<any>) => Semiring<FormalLanguage> = StringSemiring;
 export const LogSemiring = ls;

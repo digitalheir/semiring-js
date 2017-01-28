@@ -2,7 +2,6 @@ import {
     LogSemiring,
     makeDeferrable,
     BooleanSemiring,
-    StringSemiringGenerator,
     fromProbabilityToMinusLog as fromProbability,
     toProbabilityFromMinusLog as toProbability,
     Atom,
@@ -13,7 +12,7 @@ import {
     Semiring
 } from "../src/index";
 import {expect} from "chai";
-import {FormalLanguage} from "../src/semirings/string";
+import {FormalLanguage, createStringSemiring} from "../src/semirings/string";
 
 const BooleanExpressionSemiring = makeDeferrable(BooleanSemiring);
 
@@ -141,12 +140,11 @@ describe("BooleanSemiring", () => {
     });
 });
 
-const alph: Set<string> = new Set(["a", "b", "c", "d", "e"]);
-const StringSemiring: Semiring<FormalLanguage> = StringSemiringGenerator(alph);
-const testLanguage1: FormalLanguage = new FormalLanguage(alph, new Set(["ab"]));
-const testLanguage2: FormalLanguage = new FormalLanguage(alph, new Set([["c", "d"]]));
-
-describe("StringSemiring", () => {
+describe("createStringSemiring", () => {
+    const alphabet: Set<string> = new Set<string>(["a", "b", "c", "d", "e"]);
+    const StringSemiring: Semiring<FormalLanguage<string>> = createStringSemiring(alphabet);
+    const testLanguage1 = {alphabet, content: new Set<string>(["ab"])};
+    const testLanguage2 = {alphabet, content: new Set<string[]>([["c", "d"]])};
 
     it("should calculate product of languages correctly with the mult. unit", () => {
         const result = StringSemiring.times(testLanguage1, StringSemiring.multiplicativeIdentity);
@@ -159,13 +157,13 @@ describe("StringSemiring", () => {
 
     it("should calculate product of languages correctly", () => {
         const result = StringSemiring.times(testLanguage1, testLanguage2);
-        const wantedResult = new FormalLanguage(testLanguage1.alphabet, new Set(["abcd", "cdab"]));
+        const wantedResult = {alphabet: testLanguage1.alphabet, content: new Set<string>(["abcd", "cdab"])};
         expect(result).to.deep.equal(wantedResult);
     });
 
     it("should calculate addition of languages correctly", () => {
         const result = StringSemiring.plus(testLanguage1, testLanguage2);
-        const wantedResult = new FormalLanguage(testLanguage1.alphabet, new Set(["ab", "cd"]));
+        const wantedResult = {alphabet: testLanguage1.alphabet, content: new Set<string>(["ab", "cd"])};
         expect(result).to.deep.equal(wantedResult);
     });
 });

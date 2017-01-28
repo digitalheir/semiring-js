@@ -1,4 +1,3 @@
-///<reference path="semirings/string.ts"/>
 /**
  * Properties that semirings might have
  */

@@ -1,13 +1,13 @@
 import {Expression} from "./abstract-expression/expression";
 import {wrapBinaryFunction} from "./expression/binary-function";
 import {LogSemiring as ls, fromProbability, toProbability} from "./semirings/log";
-import {Atom} from "./abstract-expression/atom";
+import {AtomicValue} from "./abstract-expression/atom";
 
 export * from "./abstract-expression/expression";
 export * from "./abstract-expression/atom";
 export * from "./abstract-expression/identity";
-export * from "./abstract-expression/atom/boolean";
-export * from "./abstract-expression/atom/number";
+export * from "./abstract-expression/boolean";
+export * from "./abstract-expression/number";
 export * from "./semirings/boolean";
 export * from "./semirings/tropical";
 export * from "./semirings/floating-point";
@@ -116,8 +116,8 @@ export default Semiring;
  */
 export function makeDeferrable<T>(semiring: Semiring<T>): Semiring<Expression<T>> {
     return {
-        multiplicativeIdentity: new Atom(semiring.multiplicativeIdentity),
-        additiveIdentity: new Atom(semiring.additiveIdentity),
+        multiplicativeIdentity: new AtomicValue(semiring.multiplicativeIdentity),
+        additiveIdentity: new AtomicValue(semiring.additiveIdentity),
 
         plus: (left, right) => wrapBinaryFunction(left, right, semiring.plus),
         times: (left, right) => wrapBinaryFunction(left, right, semiring.times)

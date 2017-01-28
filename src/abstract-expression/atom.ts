@@ -4,7 +4,7 @@ function isNumber(x: any): x is number {
     return typeof x === "number";
 }
 
-export class Atom<T> implements Expression<T> {
+export class AtomicValue<T> implements Expression<T> {
     private _value: T;
 
     constructor(value: T) {

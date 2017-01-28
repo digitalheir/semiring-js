@@ -4,7 +4,7 @@ import {
     BooleanSemiring,
     fromProbabilityToMinusLog as fromProbability,
     toProbabilityFromMinusLog as toProbability,
-    Atom,
+    AtomicValue,
     Bool,
     Num,
     FloatingPointSemiring,
@@ -64,10 +64,10 @@ describe("LogSemiring", () => {
 
         const deferrableLogSemiring = makeDeferrable(LogSemiring);
 
-        const changeMe = new Atom(fromProbability(0.3));
+        const changeMe = new AtomicValue(fromProbability(0.3));
         const lvalue3 = deferrableLogSemiring.plus(
             changeMe,
-            new Atom(fromProbability(0.5))
+            new AtomicValue(fromProbability(0.5))
         );
 
         expect(toProbability(lvalue3.resolve())).to.be.above(0.799999999).and.below(0.800001);
@@ -140,7 +140,7 @@ describe("BooleanSemiring", () => {
     });
 });
 
-describe("createStringSemiring", () => {
+describe("StringSemiring", () => {
     const alphabet: Set<string> = new Set<string>(["a", "b", "c", "d", "e"]);
     const StringSemiring: Semiring<FormalLanguage<string>> = createStringSemiring(alphabet);
     const testLanguage1 = {alphabet, content: new Set<string>(["ab"])};

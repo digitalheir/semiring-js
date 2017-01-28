@@ -1,6 +1,5 @@
-import {Bool} from "../abstract-expression/atom/boolean";
 import {Expression} from "../abstract-expression/expression";
-import {Disjunction, Conjunction} from "../abstract-expression/boolean";
+import {Disjunction, Conjunction, Bool} from "../abstract-expression/boolean";
 import {Semiring} from "../index";
 
 export function OR(x: boolean, y: boolean) {

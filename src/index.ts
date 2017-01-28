@@ -2,14 +2,18 @@
  * Properties that semirings might have
  */
 import {Expression} from "./abstract-expression/expression";
-import {Atom as AtomClass} from "./abstract-expression/atom";
-import {Bool as BoolClass} from "./abstract-expression/atom/boolean";
-import {Num as NumClass} from "./abstract-expression/atom/number";
 import {wrapBinaryFunction} from "./expression/binary-function";
 import {LogSemiring as ls, fromProbability, toProbability} from "./semirings/log";
-import {BooleanSemiring as bs} from "./semirings/boolean";
-import {TropicalSemiring as ts} from "./semirings/tropical";
-import {FloatingPointSemiring as fs} from "./semirings/floating-point";
+import {Atom} from "./abstract-expression/atom";
+
+export * from "./abstract-expression/expression";
+export * from "./abstract-expression/atom";
+export * from "./abstract-expression/identity";
+export * from "./abstract-expression/atom/boolean";
+export * from "./abstract-expression/atom/number";
+export *  from "./semirings/boolean";
+export *  from "./semirings/tropical";
+export *  from "./semirings/floating-point";
 
 /**
  * Semiring defined on objects of type T.
@@ -122,16 +126,6 @@ export function makeDeferrable<T>(semiring: Semiring<T>): Semiring<Expression<T>
     };
 }
 
-export const LogSemiring: Semiring<number> = ls;
-export const BooleanSemiring: Semiring<boolean> = bs;
-export const FloatingPointSemiring: Semiring<number> = fs;
-export const TropicalSemiring: Semiring<number> = ts;
-
-export const Bool = BoolClass;
-export const Num = NumClass;
-
 export const fromProbabilityToMinusLog: (x: number) => number = fromProbability;
 export const toProbabilityFromMinusLog: (x: number) => number = toProbability;
-
-export const Atom = AtomClass;
-
+export const LogSemiring = ls;

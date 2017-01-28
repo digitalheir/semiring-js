@@ -35,15 +35,19 @@ export function Union(firstSet: Set<any>, secondSet: Set<any>) {
 
 export function Equals(firstSet: Set<any>, secondSet: Set<any>) {
     let sizeOfSecondSet: number = secondSet.size;
-    firstSet.forEach(function (value) {
-        if (!secondSet.has(value)) {
-            return false;
+    const sizeOfFirstSet: number = firstSet.size;
+
+    if (sizeOfSecondSet != sizeOfFirstSet) {
+        return false;
+    }
+
+    firstSet.forEach(function (element) {
+        if (secondSet.has(element)) {
+            sizeOfSecondSet--;
         }
+    });;;;;;;;;;
 
-        sizeOfSecondSet--;
-    });
-
-    return sizeOfSecondSet > 0;
+    return sizeOfSecondSet == 0;
 }
 export function Product(firstSet: Set<any>, secondSet: Set<any>, combine: (x: any, y: any) => any) {
     const returnSet: Set<any> = new Set();

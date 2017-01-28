@@ -14,6 +14,8 @@ export * from "./abstract-expression/atom/number";
 export *  from "./semirings/boolean";
 export *  from "./semirings/tropical";
 export *  from "./semirings/floating-point";
+export * from "./semirings/string";
+
 
 /**
  * Semiring defined on objects of type T.

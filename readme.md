@@ -14,7 +14,7 @@ Note that the set `S` on which the operators apply is defined through generics, 
 
 This library currently implements the following semirings:
 
-* Probability semiring
+* [Probability semiring](#probability-semiring)
 * Log semiring
 * Tropical semiring
 * Boolean Semiring
@@ -65,6 +65,7 @@ const AND = deferrableBooleanSemiring.times;
 const OR = deferrableBooleanSemiring.plus;
 
 const changeMyValue = new Atom(false);
+ 
 const TRUE = Bool.TRUE;
 const FALSE = Bool.FALSE;
 
@@ -89,3 +90,20 @@ changeMyValue.value = !changeMyValue.value; // Change expression tree
 console.log(expressionTree.resolve()); // > true
 
 ````
+
+## Probability semiring
+This semiring implements common notion of calculating probabilties.
+
+|Element set|⊕|⊗|0̅|1̅|
+|---|---|---|---|---|
+|Positive real numbers (**R**+)|+|*|0.0|1.0|
+
+For example: `0.5 ⊗ 1.0 = 0.5`, `0.2 ⊕ 0.7 = 0.9`.
+
+````js
+import {
+    ProbabilitySemiring
+} from "semiring";
+
+console.log(ProbabilitySemiring.times(0.5, 0.5)); // 0.25
+```

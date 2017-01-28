@@ -16,12 +16,12 @@ const BooleanExpressionSemiring = makeDeferrable(BooleanSemiring);
 
 
 describe("FloatingPointSemiring", () => {
-    it("should calculate values', () => {;;;;;;;;;;;;
+    it("should calculate values", () => {
         expect(
             FloatingPointSemiring.times(2, 3)
         ).to.equal(6);
     });
-it("should calculate values - deferred', () => {;;;;;;;;;;;;
+    it("should calculate values - deferred", () => {
         let changeMe = new Num(5);
         const times = makeDeferrable(FloatingPointSemiring).times(
             changeMe,
@@ -30,10 +30,10 @@ it("should calculate values - deferred', () => {;;;;;;;;;;;;
         expect(times.resolve()).to.equal(150);
         changeMe.value = changeMe.value * 2;
         expect(times.resolve()).to.equal(300);
-})
-})
-describe("LogSemiring', () => {;;;
-it("should calculate probabilties', () => {;;;
+    })
+});
+describe("LogSemiring", () => {
+    it("should calculate probabilties", () => {
         const lvalue = LogSemiring.times(
             fromProbability(0.3),
             fromProbability(0.5)
@@ -71,11 +71,12 @@ it("should calculate probabilties', () => {;;;
         expect(toProbability(lvalue3.resolve())).to.be.above(0.799999999).and.below(0.800001);
         changeMe.value = fromProbability(toProbability(changeMe.value) / 2);
         expect(toProbability(lvalue3.resolve())).to.be.above(0.649999999).and.below(0.65000001);
-})
-})
-describe("TropicalSemiring', () => {;;;
+    });
+});
 
-it("should calculate probabilties', () => {;;;
+describe("TropicalSemiring", () => {
+
+    it("should calculate probabilties", () => {
         expect(TropicalSemiring.multiplicativeIdentity).to.equal(0.0);
         expect(TropicalSemiring.additiveIdentity).to.equal(Infinity);
 
@@ -106,45 +107,38 @@ it("should calculate probabilties', () => {;;;
             0.0,
             Infinity
         )).to.equal(0);
-})
-})
-describe("BooleanSemiring', () => {;;;
-it("should calculate correctly - ast', () => {;;;
-        expect(
-            BooleanSemiring.times(true, true)
-        ).to.equal(true);
-})
-it("should calculate expressions correctly', () => {;;;
-        expect(
-            BooleanExpressionSemiring.times(Bool.TRUE, Bool.TRUE)
-                .resolve()
-                .valueOf()
-        ).to.equal(true);
+    });
+});
 
-        expect(
-            BooleanExpressionSemiring.plus(Bool.TRUE, Bool.FALSE)
-                .resolve()
-                .valueOf()
-        ).to.equal(true);
+describe("BooleanSemiring", () => {
+    it("should calculate correctly - ast", () => {
+        expect(BooleanSemiring.times(true, true)).to.equal(true);
+    });
 
-        expect(
-            BooleanExpressionSemiring.times(Bool.TRUE, Bool.FALSE)
-                .resolve()
-                .valueOf()
-        ).to.equal(false);
+    it("should calculate expressions correctly", () => {
+        expect(BooleanExpressionSemiring.times(Bool.TRUE, Bool.TRUE)
+            .resolve()
+            .valueOf())
+            .to.equal(true);
 
-        expect(
-            BooleanExpressionSemiring.plus(Bool.FALSE, Bool.FALSE)
-                .resolve()
-                .valueOf()
-        ).to.equal(false);
+        expect(BooleanExpressionSemiring.plus(Bool.TRUE, Bool.FALSE)
+            .resolve()
+            .valueOf())
+            .to.equal(true);
 
+        expect(BooleanExpressionSemiring.times(Bool.TRUE, Bool.FALSE)
+            .resolve()
+            .valueOf())
+            .to.equal(false);
 
-        // console.log(bsr.hasProperty(Property.Idempotent));
-        // console.log(bsr.hasProperty(Property.Commutative));
-})
-})
-const alph: Set<string> = new Set(["a', 'b', 'c', 'd', 'e']);
+        expect(BooleanExpressionSemiring.plus(Bool.FALSE, Bool.FALSE)
+            .resolve()
+            .valueOf())
+            .to.equal(false);
+    });
+});
+
+const alph: Set<string> = new Set(["a", "b", "c", "d", "e"]);
 const StringSemiring: Semiring<FormalLanguage> = StringSemiringGenerator(alph);
 const testLanguage1: FormalLanguage = new FormalLanguage(alph, new Set(["ab"]));
 const testLanguage2: FormalLanguage = new FormalLanguage(alph, new Set([["c", "d"]]));

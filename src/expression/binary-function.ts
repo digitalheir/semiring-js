@@ -9,10 +9,12 @@ export abstract class BinaryFunction<T> implements Expression<T> {
         this.right = right;
     }
 
+    //noinspection JSUnusedGlobalSymbols
     public setLeft(left: Expression<T>) {
         this.left = left;
     }
 
+    //noinspection JSUnusedGlobalSymbols
     public setRight(left: Expression<T>) {
         this.left = left;
     }

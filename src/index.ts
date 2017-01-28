@@ -5,6 +5,7 @@ import {Expression} from "./abstract-expression/expression";
 import {wrapBinaryFunction} from "./expression/binary-function";
 import {LogSemiring as ls, fromProbability, toProbability} from "./semirings/log";
 import {Atom} from "./abstract-expression/atom";
+import {FormalLanguage, StringSemiring} from "./semirings/string";
 
 export * from "./abstract-expression/expression";
 export * from "./abstract-expression/atom";
@@ -130,4 +131,6 @@ export function makeDeferrable<T>(semiring: Semiring<T>): Semiring<Expression<T>
 
 export const fromProbabilityToMinusLog: (x: number) => number = fromProbability;
 export const toProbabilityFromMinusLog: (x: number) => number = toProbability;
+
+export const StringSemiringGenerator: (S: Set<any>) => Semiring<FormalLanguage> = StringSemiring;
 export const LogSemiring = ls;

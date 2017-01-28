@@ -45,7 +45,7 @@ export function Equals(firstSet: Set<any>, secondSet: Set<any>) {
         if (secondSet.has(element)) {
             sizeOfSecondSet--;
         }
-    });;;;;;;;;;
+    });
 
     return sizeOfSecondSet == 0;
 }

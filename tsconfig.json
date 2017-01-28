@@ -2,12 +2,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "declaration": true,
-    "module": "commonjs",
+    "module": "es2015",
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "removeComments": true,
     "sourceMap": false,
-    "target": "es5",
+    "target": "es6",
     "outDir": "dist"
   },
   "include": [

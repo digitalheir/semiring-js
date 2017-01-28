@@ -26,6 +26,7 @@ export function makeConjunction(x: Expression<boolean>, y: Expression<boolean>):
     return new Conjunction(x, y);
 }
 
+//noinspection JSUnusedGlobalSymbols
 export const BooleanExpressionSemiring: Semiring<Expression<boolean>> = {
     additiveIdentity: Bool.FALSE,
     multiplicativeIdentity: Bool.TRUE,

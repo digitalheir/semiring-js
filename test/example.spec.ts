@@ -1,4 +1,3 @@
-///<reference path="../node_modules/@types/mocha/index.d.ts"/>
 import {
     LogSemiring,
     makeDeferrable,
@@ -7,13 +6,16 @@ import {
     fromProbabilityToMinusLog as fromProbability,
     toProbabilityFromMinusLog as toProbability,
     Atom,
-    Bool, Num, FloatingPointSemiring, TropicalSemiring, Semiring
+    Bool,
+    Num,
+    FloatingPointSemiring,
+    TropicalSemiring,
+    Semiring
 } from "../src/index";
 import {expect} from "chai";
 import {FormalLanguage} from "../src/semirings/string";
 
 const BooleanExpressionSemiring = makeDeferrable(BooleanSemiring);
-
 
 describe("FloatingPointSemiring", () => {
     it("should calculate values", () => {
@@ -22,7 +24,7 @@ describe("FloatingPointSemiring", () => {
         ).to.equal(6);
     });
     it("should calculate values - deferred", () => {
-        let changeMe = new Num(5);
+        const changeMe = new Num(5);
         const times = makeDeferrable(FloatingPointSemiring).times(
             changeMe,
             new Num(30)
@@ -30,8 +32,9 @@ describe("FloatingPointSemiring", () => {
         expect(times.resolve()).to.equal(150);
         changeMe.value = changeMe.value * 2;
         expect(times.resolve()).to.equal(300);
-    })
+    });
 });
+
 describe("LogSemiring", () => {
     it("should calculate probabilties", () => {
         const lvalue = LogSemiring.times(
@@ -40,7 +43,7 @@ describe("LogSemiring", () => {
         );
         expect(toProbability(lvalue)).to.equal(0.15);
 
-        let x = fromProbability(0.3);
+        const x = fromProbability(0.3);
         let xvalue = LogSemiring.times(
             x,
             LogSemiring.multiplicativeIdentity
@@ -62,7 +65,7 @@ describe("LogSemiring", () => {
 
         const deferrableLogSemiring = makeDeferrable(LogSemiring);
 
-        let changeMe = new Atom(fromProbability(0.3));
+        const changeMe = new Atom(fromProbability(0.3));
         const lvalue3 = deferrableLogSemiring.plus(
             changeMe,
             new Atom(fromProbability(0.5))

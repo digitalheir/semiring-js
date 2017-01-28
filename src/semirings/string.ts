@@ -1,4 +1,4 @@
-import {Equals, Product, Union} from "../set";
+import {Equals, Product, Union} from "../util/sets";
 import {Semiring} from "../index";
 
 export class FormalLanguage {
@@ -20,7 +20,7 @@ export function StringSemiring(S: Set<any>): Semiring<FormalLanguage> {
     };
 }
 
-function wordProduct(x: Array<any> | string, y: Array<any> | string) {
+function wordProduct(x: any[] | string, y: any[] | string) {
     if (x instanceof Array && x.length === 0) {
         return y;
     }
@@ -29,7 +29,7 @@ function wordProduct(x: Array<any> | string, y: Array<any> | string) {
         return x;
     }
 
-    if (typeof x == "string" && typeof y == "string") {
+    if (typeof x === "string" && typeof y === "string") {
         return x + y;
     } else if (isString(x) || isString(y)) {
         return toString(x) + toString(y);
@@ -49,8 +49,8 @@ export function Concatenation(firstLang: FormalLanguage, secondLang: FormalLangu
 }
 
 
-function isString(val) {
-    if (typeof val == "string") {
+function isString(val: string | Array<any>): val is string {
+    if (typeof val === "string") {
         return true;
     }
 
@@ -67,13 +67,12 @@ function isString(val) {
     return false;
 }
 
-function toString(val) {
-
-    if (typeof val == "string") {
+function toString(val: any): string {
+    if (typeof val === "string") {
         return val;
     }
 
-    let retString = "";
+    const retString = [];
 
     if (val instanceof Array) {
         for (const item of val) {
@@ -81,12 +80,12 @@ function toString(val) {
             if (!isString(substring)) {
                 return undefined;
             } else {
-                retString += substring;
+                retString.push(substring);
             }
         }
     }
 
-    return retString;
+    return retString.join("");
 }
 
 export function LanguageUnion(firstLang: FormalLanguage, secondLang: FormalLanguage) {
@@ -98,6 +97,5 @@ export function LanguageUnion(firstLang: FormalLanguage, secondLang: FormalLangu
 }
 
 export function Compatible(firstLang: FormalLanguage, secondLang: FormalLanguage) {
-    var alphsEqual = Equals(firstLang.alphabet, secondLang.alphabet);
-    return alphsEqual;
+    return Equals(firstLang.alphabet, secondLang.alphabet);
 }

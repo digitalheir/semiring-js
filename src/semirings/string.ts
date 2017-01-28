@@ -3,7 +3,7 @@ import {Semiring} from "../index";
 
 export interface FormalLanguage<T> {
     alphabet: Set<T>;
-    content: Set<{} | string | Array<T>>;
+    content: Set<{} | string | T[]>;
 }
 
 export function createStringSemiring<T>(S: Set<T>): Semiring<FormalLanguage<T>> {
@@ -56,7 +56,7 @@ export function Concatenation<T>(firstLang: FormalLanguage<T>, secondLang: Forma
 }
 
 
-function isString(val: string | Array<any>): val is string {
+function isString<T>(val: string | any[]): val is string | string[] {
     if (typeof val === "string") {
         return true;
     }

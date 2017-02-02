@@ -15,7 +15,7 @@ Note that the set `S` on which the operators apply is defined through generics, 
 This library currently implements the following semirings:
 
 * [Probability semiring](#probability-semiring)
-* Log semiring
+* [Log semiring](#log-semiring)
 * Tropical semiring
 * Boolean Semiring
 
@@ -106,4 +106,27 @@ import {
 } from "semiring";
 
 console.log(ProbabilitySemiring.times(0.5, 0.5)); // 0.25
+```
+
+## Log semiring
+A semiring usually used for multiplying numbers close to zero, to avoid arithmetic underflow.
+
+|Element set|⊕|⊗|0̅|1̅|
+|---|---|---|---|---|
+|Positive real numbers (**R**+) including ±∞|-log(e^{-x} + e^{-y})|+|+∞|0|
+
+
+For example: 
+`p = -log(0.1)`
+`q = -log(0.5)`
+
+`p ⊕ q = -log(e^-p + e^-q) = -log(0.6)`.
+
+`p ⊕ q = p + q = -log(0.05)`.
+
+````js
+import {
+    LogSemiring
+} from "semiring";
+
 ```

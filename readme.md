@@ -16,8 +16,9 @@ This library currently implements the following semirings:
 
 * [Probability semiring](#probability-semiring)
 * [Log semiring](#log-semiring)
-* Tropical semiring
-* Boolean Semiring
+* [Tropical semiring](#tropical-semiring)
+* [Boolean Semiring](#boolean-semiring)
+* [String Semiring](#string-semiring)
 
 # Motivation
 
@@ -127,6 +128,64 @@ For example:
 ````js
 import {
     LogSemiring
+} from "semiring";
+
+```
+
+## Boolean semiring
+A semiring that represents Boolean logic.
+
+|Element set|⊕|⊗|0̅|1̅|
+|---|---|---|---|---|
+|{True, False}|∨|∧|False|True|
+
+
+For example: 
+`True ⊕ False = True`.
+
+`True ⊗ False = False`.
+
+````js
+import {
+    BooleanSemiring
+} from "semiring";
+
+```
+
+## Tropical semiring
+A semiring that describes [Tropical geometry](https://en.wikipedia.org/wiki/Tropical_geometry).
+
+|Element set|⊕|⊗|0̅|1̅|
+|---|---|---|---|---|
+|Real numbers **R** including ∞|min|+|∞|0|
+
+For example: 
+`4 ⊕ ∞ = 4`.
+
+`4 ⊗ 4 = 8`.
+
+````js
+import {
+    TropicalSemiring
+} from "semiring";
+
+```
+
+## String semiring
+A semiring of formal languages. Used in automaton theory. ([An unweighted functional transducer can be seen as as a weighted automaton over the string semiring.](http://www.openfst.org/twiki/pub/FST/FstHltTutorial/tutorial_part1.pdf))
+
+|Element set|⊕|⊗|0̅|1̅|
+|---|---|---|---|---|
+|All languages over an alphabet Σ|∪|L1 ⊗ L2 = {w⋅v \| w ∈ L1, v ∈ L2}|{}|{""}|
+
+For example: 
+`{a, b, c} ⊕ {ab} = {a, b, c, ab}`.
+
+`{ab, ac} ⊗ {ab} = {abab, acab}`.
+
+````js
+import {
+    StringSemiring
 } from "semiring";
 
 ```

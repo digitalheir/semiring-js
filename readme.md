@@ -38,7 +38,7 @@ import {
     BooleanSemiring,
     fromProbabilityToMinusLog as fromProbability,
     toProbabilityFromMinusLog as toProbability,
-    Atom,
+    AtomicValue,
     Bool
 } from "semiring";
 
@@ -65,7 +65,7 @@ const deferrableBooleanSemiring = makeDeferrable(BooleanSemiring);
 const AND = deferrableBooleanSemiring.times;
 const OR = deferrableBooleanSemiring.plus;
 
-const changeMyValue = new Atom(false);
+const changeMyValue = new AtomicValue(false);
  
 const TRUE = Bool.TRUE;
 const FALSE = Bool.FALSE;

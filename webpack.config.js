@@ -1,7 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const yargs = require('yargs');
-const VERSION = require('./version').default;
 const libraryName = 'semiring';
 const plugins = [
         new webpack.LoaderOptionsPlugin({

@@ -189,3 +189,9 @@ import {
 } from "semiring";
 
 ````
+
+## License
+[MIT](https://github.com/digitalheir/semiring-js/blob/master/LICENSE)
+
+## Contact
+Maarten Trompper <<maartentrompper@freedom.nl>>

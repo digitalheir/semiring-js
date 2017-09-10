@@ -5,6 +5,7 @@
 
 
 # Semiring.js
+[Live demo in browser](https://digitalheir.github.io/semiring-js)
 
 A simple library for working with [ring-like algebraic structures](https://en.wikipedia.org/wiki/Semiring) in Javascript that implements some common semirings. This library does not validate properties of the defined structures, so you could actually define any algebraic structure that has some notion of 'plus' and 'times'. It is a simple utility library I needed for my own purposes: I am not trying to implement all abstract algebra in here.
 

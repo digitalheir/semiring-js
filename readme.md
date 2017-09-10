@@ -6,7 +6,7 @@
 
 # Semiring.js
 
-A simple library for working with ring-like algebraic structures in Javascript that implements some common semirings. This library does not check properties of the defined structures, so you could actually define any algebraic structure that has some notion of 'plus' and 'times'. It is just a simple utility library I needed for my own purposes: I am not trying to implement all abstract algebra in here.
+A simple library for working with [ring-like algebraic structures](https://en.wikipedia.org/wiki/Semiring) in Javascript that implements some common semirings. This library does not validate properties of the defined structures, so you could actually define any algebraic structure that has some notion of 'plus' and 'times'. It is a simple utility library I needed for my own purposes: I am not trying to implement all abstract algebra in here.
 
 Written in Typescript, published as a [commonjs modules on NPM](https://www.npmjs.com/package/semiring) and a [single-file minified UMD module on GitHub](https://github.com/digitalheir/semiring-js/releases) in vulgar ES5.
 

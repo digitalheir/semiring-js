@@ -107,7 +107,7 @@ import {
 } from "semiring";
 
 console.log(ProbabilitySemiring.times(0.5, 0.5)); // 0.25
-```
+````
 
 ## Log semiring
 A semiring usually used for multiplying numbers close to zero, to avoid arithmetic underflow.
@@ -130,7 +130,7 @@ import {
     LogSemiring
 } from "semiring";
 
-```
+````
 
 ## Boolean semiring
 A semiring that represents Boolean logic.
@@ -150,7 +150,7 @@ import {
     BooleanSemiring
 } from "semiring";
 
-```
+````
 
 ## Tropical semiring
 A semiring that describes [Tropical geometry](https://en.wikipedia.org/wiki/Tropical_geometry). An interesting application of this semiring was made by [Paul Klemperer for use in auctions during the financial crisis](https://www.theguardian.com/science/video/2013/jul/12/geometry-banking-crisis-video).
@@ -169,7 +169,7 @@ import {
     TropicalSemiring
 } from "semiring";
 
-```
+````
 
 ## String semiring
 A semiring of formal languages. Used in automaton theory. ([An unweighted functional transducer can be seen as as a weighted automaton over the string semiring.](http://www.openfst.org/twiki/pub/FST/FstHltTutorial/tutorial_part1.pdf))
@@ -188,4 +188,4 @@ import {
     StringSemiring
 } from "semiring";
 
-```
+````

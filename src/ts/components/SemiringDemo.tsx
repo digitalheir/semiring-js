@@ -1,5 +1,11 @@
 import * as React from "react";
-import {Semiring, FloatingPointSemiring, LogSemiring, TropicalSemiring, BooleanSemiring} from "semiring";
+import {
+    Semiring,
+    FloatingPointSemiring,
+    createStringSemiring,
+    LogSemiring,
+    TropicalSemiring, BooleanSemiring
+} from "semiring";
 import {PureComponent, StatelessComponent} from "react";
 
 export interface TexState {
@@ -14,6 +20,7 @@ const supportedSemirings = {
     "Log": true,
     "Tropical": true,
     "Boolean": true,
+    "String": true,
 };
 
 export class SemiringDemo extends React.PureComponent<TexProps, TexState> {
@@ -69,9 +76,17 @@ function getSemiring(selected: string) {
             return TropicalSemiring;
         case "Boolean":
             return BooleanSemiring;
+        case "String":
+            const alphabet: Set<string> = new Set<string>(["a", "b", "c"]);
+            return createStringSemiring(alphabet);
         default:
             throw new Error("Unknown semiring: " + selected);
     }
+}
+
+function stringified(res: any) {
+    if (res as any === Infinity) return "Infinity";
+    else return JSON.stringify(res);
 }
 
 function renderResult<T>(o: "plus" | "times", rig: Semiring<T>, plusLeft: T, plusRight: T, timesLeft: T, timesRight: T): string {
@@ -81,8 +96,7 @@ function renderResult<T>(o: "plus" | "times", rig: Semiring<T>, plusLeft: T, plu
     } else {
         res = (rig.times(timesLeft, timesRight));
     }
-    if (res as any === Infinity) return "Infinity";
-    else return JSON.stringify(res);
+    return stringified(res);
 }
 
 export class SemiringComponent<T> extends PureComponent<SemiringProps, SemiringState<T>> {
@@ -102,7 +116,7 @@ export class SemiringComponent<T> extends PureComponent<SemiringProps, SemiringS
         const s: any = {};
         LEFT_RIGHT.forEach(lr => {
             const valueToSet = (lr === "Left" ? rig.multiplicativeIdentity : rig.additiveIdentity);
-            const valueString = valueToSet.toString();
+            const valueString = stringified(valueToSet);
             PLUS_TIMES.forEach(pt => {
                 const id = `${pt}${lr}`;
                 const p = document.getElementById(id) as HTMLInputElement;
@@ -114,6 +128,7 @@ export class SemiringComponent<T> extends PureComponent<SemiringProps, SemiringS
         });
         this.setState(s);
     }
+
 
     componentDidUpdate(prevProps: SemiringProps, prevState: SemiringState<T>) {
         console.log(this.props.semiring !== prevProps.semiring);
@@ -166,41 +181,69 @@ export class SemiringComponent<T> extends PureComponent<SemiringProps, SemiringS
                     break;
             }
         }
+        if (selected === "String") {
+            let number: T = {} as any;
+            try {
+                number = JSON.parse(value);
+            } catch (e) {
+                console.error("Can't parse " + value);
+            }
+            switch (k) {
+                case "plusLeft":
+                    this.setState({plusLeft: number});
+                    break;
+                case "plusRight":
+                    this.setState({plusRight: number});
+                    break;
+                case "timesLeft":
+                    this.setState({timesLeft: number});
+                    break;
+                case "timesRight":
+                    this.setState({timesRight: number});
+                    break;
+            }
+        }
     }
 
     render() {
-        const rig = getSemiring(this.props.semiring) as any as Semiring<T>;
-        const plusRight = this.state.plusRight;
-        const plusLeft = this.state.plusLeft;
-        const timesRight = this.state.timesRight;
-        const timesLeft = this.state.timesLeft;
-        console.log(`${plusLeft} ⊕ ${plusRight} = ${rig.plus(plusLeft, plusRight)}`);
-        console.log(`${timesLeft} ⊗ ${timesRight} = ${rig.times(timesLeft, timesRight)}`);
+        try {
+            const rig = getSemiring(this.props.semiring) as any as Semiring<T>;
+            const plusRight = this.state.plusRight;
+            const plusLeft = this.state.plusLeft;
+            const timesRight = this.state.timesRight;
+            const timesLeft = this.state.timesLeft;
+            console.log(`${plusLeft} ⊕ ${plusRight} = ${rig.plus(plusLeft, plusRight)}`);
+            console.log(`${timesLeft} ⊗ ${timesRight} = ${rig.times(timesLeft, timesRight)}`);
 
-        return <div className="semiring-equations">
-            {
-                PLUS_TIMES.map((o: "plus" | "times") =>
-                    <div className="semiring-equation">
-                        <div className="mdc-form-field mdc-form-field--align-end">
-                            <div className="mdc-textfield">
-                                <input id={`${o}Left`}
-                                       onChange={(e) => this.changeState(`${o}Left`, e.target.value)}
-                                       type="text" className="mdc-textfield__input equation-field"/>
+            return <div className="semiring-equations">
+                {
+                    PLUS_TIMES.map((o: "plus" | "times") =>
+                        <div className="semiring-equation">
+                            <div className="mdc-form-field mdc-form-field--align-end">
+                                <div className="mdc-textfield">
+                                    <input id={`${o}Left`}
+                                           onChange={(e) => this.changeState(`${o}Left`, e.target.value)}
+                                           type="text" className="mdc-textfield__input equation-field"/>
+                                </div>
                             </div>
-                        </div>
-                        <span className="operator">{o === "plus" ? "⊕" : "⊗"}</span>
-                        <div className="mdc-form-field mdc-form-field--align-end">
-                            <div className="mdc-textfield">
-                                <input id={`${o}Right`}
-                                       onChange={(e) => this.changeState(`${o}Right`, e.target.value)}
-                                       type="text" className="mdc-textfield__input equation-field"/>
+                            <span className="operator">{o === "plus" ? "⊕" : "⊗"}</span>
+                            <div className="mdc-form-field mdc-form-field--align-end">
+                                <div className="mdc-textfield">
+                                    <input id={`${o}Right`}
+                                           onChange={(e) => this.changeState(`${o}Right`, e.target.value)}
+                                           type="text" className="mdc-textfield__input equation-field"/>
+                                </div>
                             </div>
+                            = {renderResult(o, rig, plusLeft, plusRight, timesLeft, timesRight)
+                        }
                         </div>
-                        = {renderResult(o, rig, plusLeft, plusRight, timesLeft, timesRight)
-                    }
-                    </div>
-                )
-            }
-        </div>;
+                    )
+                }
+            </div>;
+        } catch (e) {
+            return <div className="error">
+                {e.message}
+            </div>;
+        }
     }
 }

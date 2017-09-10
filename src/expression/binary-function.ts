@@ -32,7 +32,7 @@ export class WrappedBinaryFunction<T> extends BinaryFunction<T> {
 
     public resolve(): T {
         return this.f(this.left.resolve(), this.right.resolve());
-    };
+    }
 }
 
 export function wrapBinaryFunction<T>(left: Expression<T>, right: Expression<T>, f: (x: T, y: T) => T): WrappedBinaryFunction<T> {

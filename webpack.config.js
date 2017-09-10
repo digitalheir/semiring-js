@@ -1,9 +1,9 @@
-var webpack = require('webpack'),
-    path = require('path'),
-    yargs = require('yargs');
-var VERSION = require('./version').default;
-var libraryName = 'semiring',
-    plugins = [
+const webpack = require('webpack');
+const path = require('path');
+const yargs = require('yargs');
+const VERSION = require('./version').default;
+const libraryName = 'semiring';
+const plugins = [
         new webpack.LoaderOptionsPlugin({
             options: {
                 tslint: {
@@ -12,15 +12,9 @@ var libraryName = 'semiring',
                 }
             }
         })
-    ],
-    outputFile;
-
-if (yargs.argv.p) {
-    //plugins.push(new webpack.optimize.UglifyJsPlugin({ minimize: true }));
-    outputFile = libraryName + '.' + VERSION + '.min.js';
-} else {
-    outputFile = libraryName + '.' + VERSION + '.js';
-}
+    ];
+const outputFile = "index.js";
+// outputFile = libraryName + '.' + VERSION + '.min.js';
 
 var config = {
     entry: [

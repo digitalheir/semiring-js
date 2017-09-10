@@ -10,6 +10,7 @@
     <!--<link rel="apple-touch-icon" href="apple-touch-icon.png">-->
 
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/katex.min.css">
     <link rel="stylesheet" href="css/main.css">
     <!--TODO use separate component-->
     <link rel="stylesheet" href="css/material-components-web.css">
@@ -47,7 +48,7 @@
 <![endif]-->
 
 <h1>
-    <a href="https://github.com/digitalheir/semiring-js">
+    <a class="title" href="https://github.com/digitalheir/semiring-js">
         Semiring.js
     </a>
 </h1>
@@ -64,6 +65,108 @@
             fill="currentColor" class="octo-body"></path>
     </svg>
 </a>
+
+
+<p>
+    A semiring is a mathematical construct that abstracts some notion of "plus" and "times" on mathematical objects.
+    These objects can be numbers, but may also be other objects such as strings.
+</p>
+
+<p>
+    More formally, a semiring is a <a href="https://en.wikipedia.org/wiki/Set_(mathematics)">set</a> <span
+    class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation
+    encoding="application/x-tex">R</annotation></semantics></math></span><span class="katex-html"
+                                                                               aria-hidden="true"><span class="strut"
+                                                                                                        style="height: 0.68333em;"></span><span
+    class="strut bottom" style="height: 0.68333em; vertical-align: 0em;"></span><span class="base"><span
+    class="mord mathit" style="margin-right: 0.00773em;">R</span></span></span></span>
+</span> equipped
+    with two <a href="https://en.wikipedia.org/wiki/Binary_operation">binary
+    operations</a> <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⊕</mo></mrow><annotation encoding="application/x-tex">\oplus</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.58333em;"></span><span class="strut bottom" style="height: 0.66666em; vertical-align: -0.08333em;"></span><span class="base"><span class="mord">⊕</span></span></span></span>
+</span> and <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⊗</mo></mrow><annotation encoding="application/x-tex">\otimes</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.58333em;"></span><span class="strut bottom" style="height: 0.66666em; vertical-align: -0.08333em;"></span><span class="base"><span class="mord">⊗</span></span></span></span>
+</span>, called addition and
+    multiplication, such that:
+<ul class="general-semiring-properties">
+    <li><span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>R</mi><mo
+        separator="true">,</mo><mo>⊕</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">(R, \oplus)</annotation></semantics></math></span><span
+        class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.75em;"></span><span class="strut bottom"
+                                                                                                       style="height: 1em; vertical-align: -0.25em;"></span><span
+        class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right: 0.00773em;">R</span><span
+        class="mpunct">,</span><span class="mord">⊕</span><span class="mclose">)</span></span></span></span></span> is
+        a <a href="https://en.wikipedia.org/wiki/Monoid#Commutative_monoid" title="Commutative monoid">commutative monoid</a> with <a href="https://en.wikipedia.org/wiki/Identity_element">identity</a> element <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover
+            accent="true"><mn>0</mn><mo>¯</mo></mover></mrow><annotation
+            encoding="application/x-tex">\bar 0</annotation></semantics></math></span><span class="katex-html"
+                                                                                            aria-hidden="true"><span
+            class="strut" style="height: 0.78122em;"></span><span class="strut bottom"
+                                                                  style="height: 0.78122em; vertical-align: 0em;"></span><span
+            class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist"
+                                                                                                     style="height: 0.78122em;"><span
+            class="" style="top: -3em;"><span class="pstrut" style="height: 3em;"></span><span
+            class="mord mathrm">0</span></span><span class="" style="top: -3.21344em;"><span class="pstrut"
+                                                                                             style="height: 3em;"></span><span
+            class="accent-body" style="margin-left: 0em;"><span
+            class="">¯</span></span></span></span></span></span></span></span></span></span>
+</span>:
+        <ul>
+            <li>
+                <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>a</mi><mo>⊕</mo><mi>b</mi><mo>)</mo><mo>⊕</mo><mi>c</mi><mo>=</mo><mi>a</mi><mo>⊕</mo><mo>(</mo><mi>b</mi><mo>⊕</mo><mi>c</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(a \oplus b) \oplus c = a \oplus (b \oplus c)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.75em;"></span><span class="strut bottom" style="height: 1em; vertical-align: -0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit">a</span><span class="mbin">⊕</span><span class="mord mathit">b</span><span class="mclose">)</span><span class="mbin">⊕</span><span class="mord mathit">c</span><span class="mrel">=</span><span class="mord mathit">a</span><span class="mbin">⊕</span><span class="mopen">(</span><span class="mord mathit">b</span><span class="mbin">⊕</span><span class="mord mathit">c</span><span class="mclose">)</span></span></span></span></span>
+            </li>
+            <li>
+                <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mn>0</mn><mo>¯</mo></mover><mo>⊕</mo><mi>a</mi><mo>=</mo><mi>a</mi><mo>⊕</mo><mn>0</mn><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">\bar0 \oplus a = a \oplus 0 = a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.78122em;"></span><span class="strut bottom" style="height: 0.86455em; vertical-align: -0.08333em;"></span><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.78122em;"><span class="" style="top: -3em;"><span class="pstrut" style="height: 3em;"></span><span class="mord mathrm">0</span></span><span class="" style="top: -3.21344em;"><span class="pstrut" style="height: 3em;"></span><span class="accent-body" style="margin-left: 0em;"><span class="">¯</span></span></span></span></span></span></span><span class="mbin">⊕</span><span class="mord mathit">a</span><span class="mrel">=</span><span class="mord mathit">a</span><span class="mbin">⊕</span><span class="mord mathrm">0</span><span class="mrel">=</span><span class="mord mathit">a</span></span></span></span></span>
+            </li>
+            <li>
+                <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mo>=</mo><mi>b</mi><mo>+</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">a+b=b+a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.69444em;"></span><span class="strut bottom" style="height: 0.77777em; vertical-align: -0.08333em;"></span><span class="base"><span class="mord mathit">a</span><span class="mbin">+</span><span class="mord mathit">b</span><span class="mrel">=</span><span class="mord mathit">b</span><span class="mbin">+</span><span class="mord mathit">a</span></span></span></span></span>
+            </li>
+        </ul>
+    </li>
+    <li><span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>R</mi><mo separator="true">,</mo><mo>⊗</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">(R, \otimes)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.75em;"></span><span class="strut bottom" style="height: 1em; vertical-align: -0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right: 0.00773em;">R</span><span class="mpunct">,</span><span class="mord">⊗</span><span class="mclose">)</span></span></span></span></span> is
+        a <a href="https://en.wikipedia.org/wiki/Monoid" title="Monoid">monoid</a> with identity element <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mn>1</mn><mo>¯</mo></mover></mrow><annotation encoding="application/x-tex">\bar1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.78122em;"></span><span class="strut bottom" style="height: 0.78122em; vertical-align: 0em;"></span><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.78122em;"><span class="" style="top: -3em;"><span class="pstrut" style="height: 3em;"></span><span class="mord mathrm">1</span></span><span class="" style="top: -3.21344em;"><span class="pstrut" style="height: 3em;"></span><span class="accent-body" style="margin-left: 0em;"><span class="">¯</span></span></span></span></span></span></span></span></span></span></span>:
+        <ul>
+            <li>
+                <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>a</mi><mo>⊗</mo><mi>b</mi><mo>)</mo><mo>⊗</mo><mi>c</mi><mo>=</mo><mi>a</mi><mo>⊗</mo><mo>(</mo><mi>b</mi><mo>⊗</mo><mi>c</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(a\otimes b)\otimes c=a\otimes (b\otimes c)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.75em;"></span><span class="strut bottom" style="height: 1em; vertical-align: -0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit">a</span><span class="mbin">⊗</span><span class="mord mathit">b</span><span class="mclose">)</span><span class="mbin">⊗</span><span class="mord mathit">c</span><span class="mrel">=</span><span class="mord mathit">a</span><span class="mbin">⊗</span><span class="mopen">(</span><span class="mord mathit">b</span><span class="mbin">⊗</span><span class="mord mathit">c</span><span class="mclose">)</span></span></span></span></span>
+            </li>
+            <li>
+                <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mn>1</mn><mo>¯</mo></mover><mo>⊗</mo><mi>a</mi><mo>=</mo><mi>a</mi><mo>⊗</mo><mover accent="true"><mn>1</mn><mo>¯</mo></mover><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">\bar1 \otimes a=a\otimes \bar1 = a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.78122em;"></span><span class="strut bottom" style="height: 0.86455em; vertical-align: -0.08333em;"></span><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.78122em;"><span class="" style="top: -3em;"><span class="pstrut" style="height: 3em;"></span><span class="mord mathrm">1</span></span><span class="" style="top: -3.21344em;"><span class="pstrut" style="height: 3em;"></span><span class="accent-body" style="margin-left: 0em;"><span class="">¯</span></span></span></span></span></span></span><span class="mbin">⊗</span><span class="mord mathit">a</span><span class="mrel">=</span><span class="mord mathit">a</span><span class="mbin">⊗</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.78122em;"><span class="" style="top: -3em;"><span class="pstrut" style="height: 3em;"></span><span class="mord mathrm">1</span></span><span class="" style="top: -3.21344em;"><span class="pstrut" style="height: 3em;"></span><span class="accent-body" style="margin-left: 0em;"><span class="">¯</span></span></span></span></span></span></span><span class="mrel">=</span><span class="mord mathit">a</span></span></span></span></span>
+            </li>
+        </ul>
+    </li>
+    <li>Multiplication left and right <a href="https://en.wikipedia.org/wiki/Distributive_property" title="Distributive law">distributes</a> over
+        addition:
+        <ul>
+            <li>
+                <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>⊗</mo><mo>(</mo><mi>b</mi><mo>+</mo><mi>c</mi><mo>)</mo><mo>=</mo><mo>(</mo><mi>a</mi><mo>⊗</mo><mi>b</mi><mo>)</mo><mo>+</mo><mo>(</mo><mi>a</mi><mo>⊗</mo><mi>c</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">a \otimes (b+c)=(a\otimes b)+(a\otimes c)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.75em;"></span><span class="strut bottom" style="height: 1em; vertical-align: -0.25em;"></span><span class="base"><span class="mord mathit">a</span><span class="mbin">⊗</span><span class="mopen">(</span><span class="mord mathit">b</span><span class="mbin">+</span><span class="mord mathit">c</span><span class="mclose">)</span><span class="mrel">=</span><span class="mopen">(</span><span class="mord mathit">a</span><span class="mbin">⊗</span><span class="mord mathit">b</span><span class="mclose">)</span><span class="mbin">+</span><span class="mopen">(</span><span class="mord mathit">a</span><span class="mbin">⊗</span><span class="mord mathit">c</span><span class="mclose">)</span></span></span></span></span>
+            </li>
+            <li>
+                <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo>)</mo><mo>⊗</mo><mi>c</mi><mo>=</mo><mo>(</mo><mi>a</mi><mo>⊗</mo><mi>c</mi><mo>)</mo><mo>+</mo><mo>(</mo><mi>b</mi><mo>⊗</mo><mi>c</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(a+b)\otimes c=(a\otimes c)+(b\otimes c)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.75em;"></span><span class="strut bottom" style="height: 1em; vertical-align: -0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit">a</span><span class="mbin">+</span><span class="mord mathit">b</span><span class="mclose">)</span><span class="mbin">⊗</span><span class="mord mathit">c</span><span class="mrel">=</span><span class="mopen">(</span><span class="mord mathit">a</span><span class="mbin">⊗</span><span class="mord mathit">c</span><span class="mclose">)</span><span class="mbin">+</span><span class="mopen">(</span><span class="mord mathit">b</span><span class="mbin">⊗</span><span class="mord mathit">c</span><span class="mclose">)</span></span></span></span></span>
+            </li>
+        </ul>
+    </li>
+    <li>Multiplication by <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover
+        accent="true"><mn>0</mn><mo>¯</mo></mover></mrow><annotation
+        encoding="application/x-tex">\bar 0</annotation></semantics></math></span><span class="katex-html"
+                                                                                        aria-hidden="true"><span
+        class="strut" style="height: 0.78122em;"></span><span class="strut bottom"
+                                                              style="height: 0.78122em; vertical-align: 0em;"></span><span
+        class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist"
+                                                                                                 style="height: 0.78122em;"><span
+        class="" style="top: -3em;"><span class="pstrut" style="height: 3em;"></span><span
+        class="mord mathrm">0</span></span><span class="" style="top: -3.21344em;"><span class="pstrut"
+                                                                                         style="height: 3em;"></span><span
+        class="accent-body" style="margin-left: 0em;"><span
+        class="">¯</span></span></span></span></span></span></span></span></span></span>
+</span> <a href="https://en.wikipedia.org/wiki/Annihilating_element" title="Annihilating element">annihilates</a> <i>R</i>:
+        <ul>
+            <li>
+                <span class="katex-inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mn>0</mn><mo>¯</mo></mover><mo>⊗</mo><mi>a</mi><mo>=</mo><mi>a</mi><mo>⊗</mo><mover accent="true"><mn>0</mn><mo>¯</mo></mover><mo>=</mo><mover accent="true"><mn>0</mn><mo>¯</mo></mover></mrow><annotation encoding="application/x-tex">\bar0 \otimes a=a\otimes \bar0 = \bar0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height: 0.78122em;"></span><span class="strut bottom" style="height: 0.86455em; vertical-align: -0.08333em;"></span><span class="base"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.78122em;"><span class="" style="top: -3em;"><span class="pstrut" style="height: 3em;"></span><span class="mord mathrm">0</span></span><span class="" style="top: -3.21344em;"><span class="pstrut" style="height: 3em;"></span><span class="accent-body" style="margin-left: 0em;"><span class="">¯</span></span></span></span></span></span></span><span class="mbin">⊗</span><span class="mord mathit">a</span><span class="mrel">=</span><span class="mord mathit">a</span><span class="mbin">⊗</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.78122em;"><span class="" style="top: -3em;"><span class="pstrut" style="height: 3em;"></span><span class="mord mathrm">0</span></span><span class="" style="top: -3.21344em;"><span class="pstrut" style="height: 3em;"></span><span class="accent-body" style="margin-left: 0em;"><span class="">¯</span></span></span></span></span></span></span><span class="mrel">=</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.78122em;"><span class="" style="top: -3em;"><span class="pstrut" style="height: 3em;"></span><span class="mord mathrm">0</span></span><span class="" style="top: -3.21344em;"><span class="pstrut" style="height: 3em;"></span><span class="accent-body" style="margin-left: 0em;"><span class="">¯</span></span></span></span></span></span></span></span></span></span></span>
+            </li>
+        </ul>
+    </li>
+</ul>
+</p>
+
+<p>
+    Different semirings are useful for different purposes. Select a semiring below to get more information.
+</p>
 
 <div id="mount-point"></div>
 

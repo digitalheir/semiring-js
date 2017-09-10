@@ -4,7 +4,7 @@ import {
     FloatingPointSemiring,
     createStringSemiring,
     LogSemiring,
-    TropicalSemiring, BooleanSemiring
+    TropicalSemiring, BooleanSemiring, Bool
 } from "semiring";
 import {PureComponent, StatelessComponent} from "react";
 
@@ -22,6 +22,22 @@ const supportedSemirings = {
     "Boolean": true,
     "String": true,
 };
+
+function getSemiringComponent(s: keyof typeof supportedSemirings) {
+    switch (s) {
+        case "Probability":
+            return <ProbabilitySemiringComponent/>;
+        case "Log":
+            return <LogSemiringComponent/>;
+        case "Tropical":
+            return <TropicalSemiringComponent/>;
+        case "Boolean":
+            return <BooleanSemiringComponent/>;
+        case "String":
+        // return <StringSemiringComponent/>;
+    }
+    return <SemiringComponent semiring={s}/>;
+}
 
 export class SemiringDemo extends React.PureComponent<TexProps, TexState> {
     constructor() {
@@ -47,7 +63,7 @@ export class SemiringDemo extends React.PureComponent<TexProps, TexState> {
                     Object.keys(supportedSemirings)
                         .map((s, i) => <option selected={i === 0} key={s} value={s}>{`${s} semiring`}</option>)
                 }</select>
-            <SemiringComponent semiring={this.state.selectedSemiring}/>
+            {getSemiringComponent(this.state.selectedSemiring)}
         </div>;
     }
 }
@@ -99,44 +115,62 @@ function renderResult<T>(o: "plus" | "times", rig: Semiring<T>, plusLeft: T, plu
     return stringified(res);
 }
 
+function renderEquations<T>(rig: Semiring<T>, plusLeft: T, plusRight: T, timesLeft: T, timesRight: T, changeState: (a: string, b: string) => any) {
+    return <div className="semiring-equations">{PLUS_TIMES.map((o: "plus" | "times") =>
+        <div key={o} className="semiring-equation">
+            <div className="mdc-form-field mdc-form-field--align-end">
+                <div className="mdc-textfield">
+                    <input id={`${o}Left`}
+                           onChange={(e) => changeState(`${o}Left`, e.target.value)}
+                           type="text" className="mdc-textfield__input equation-field"/>
+                </div>
+            </div>
+            <span className="operator">{o === "plus" ? "⊕" : "⊗"}</span>
+            <div className="mdc-form-field mdc-form-field--align-end">
+                <div className="mdc-textfield">
+                    <input id={`${o}Right`}
+                           onChange={(e) => changeState(`${o}Right`, e.target.value)}
+                           type="text" className="mdc-textfield__input equation-field"/>
+                </div>
+            </div>
+            = {renderResult(o, rig, plusLeft, plusRight, timesLeft, timesRight)
+        }
+        </div>
+    )}</div>;
+}
+
+function setInitialCalculations(rig: Semiring<any>) {
+    const s: any = {};
+    LEFT_RIGHT.forEach(lr => {
+        const valueToSet = (lr === "Left" ? rig.multiplicativeIdentity : rig.additiveIdentity);
+        const valueString = stringified(valueToSet);
+        PLUS_TIMES.forEach(pt => {
+            const id = `${pt}${lr}`;
+            const p = document.getElementById(id) as HTMLInputElement;
+            // console.log(id);
+            // console.log(valueToSet);
+            s[id] = valueToSet;
+            if (p) p.value = valueString;
+        });
+    });
+    return (s);
+}
+
+
 export class SemiringComponent<T> extends PureComponent<SemiringProps, SemiringState<T>> {
     constructor({semiring}: SemiringProps) {
         super();
         const rig: Semiring<any> = getSemiring(semiring);
-        this.state = {
-            plusLeft: rig.multiplicativeIdentity,
-            plusRight: rig.additiveIdentity,
-            timesLeft: rig.multiplicativeIdentity,
-            timesRight: rig.additiveIdentity,
-        };
+        this.state = initState(rig);
     }
-
-    setInitialCalculations() {
-        const rig = getSemiring(this.props.semiring);
-        const s: any = {};
-        LEFT_RIGHT.forEach(lr => {
-            const valueToSet = (lr === "Left" ? rig.multiplicativeIdentity : rig.additiveIdentity);
-            const valueString = stringified(valueToSet);
-            PLUS_TIMES.forEach(pt => {
-                const id = `${pt}${lr}`;
-                const p = document.getElementById(id) as HTMLInputElement;
-                // console.log(id);
-                // console.log(valueToSet);
-                s[id] = valueToSet;
-                if (p) p.value = valueString;
-            });
-        });
-        this.setState(s);
-    }
-
 
     componentDidUpdate(prevProps: SemiringProps, prevState: SemiringState<T>) {
         console.log(this.props.semiring !== prevProps.semiring);
-        if (this.props.semiring !== prevProps.semiring) this.setInitialCalculations();
+        if (this.props.semiring !== prevProps.semiring) this.setState(setInitialCalculations(getSemiring(this.props.semiring)));
     }
 
     componentDidMount() {
-        this.setInitialCalculations();
+        this.setState(setInitialCalculations(getSemiring(this.props.semiring)));
     }
 
     changeState(k: string, value: string) {
@@ -215,30 +249,13 @@ export class SemiringComponent<T> extends PureComponent<SemiringProps, SemiringS
             console.log(`${plusLeft} ⊕ ${plusRight} = ${rig.plus(plusLeft, plusRight)}`);
             console.log(`${timesLeft} ⊗ ${timesRight} = ${rig.times(timesLeft, timesRight)}`);
 
-            return <div className="semiring-equations">
-                {
-                    PLUS_TIMES.map((o: "plus" | "times") =>
-                        <div className="semiring-equation">
-                            <div className="mdc-form-field mdc-form-field--align-end">
-                                <div className="mdc-textfield">
-                                    <input id={`${o}Left`}
-                                           onChange={(e) => this.changeState(`${o}Left`, e.target.value)}
-                                           type="text" className="mdc-textfield__input equation-field"/>
-                                </div>
-                            </div>
-                            <span className="operator">{o === "plus" ? "⊕" : "⊗"}</span>
-                            <div className="mdc-form-field mdc-form-field--align-end">
-                                <div className="mdc-textfield">
-                                    <input id={`${o}Right`}
-                                           onChange={(e) => this.changeState(`${o}Right`, e.target.value)}
-                                           type="text" className="mdc-textfield__input equation-field"/>
-                                </div>
-                            </div>
-                            = {renderResult(o, rig, plusLeft, plusRight, timesLeft, timesRight)
-                        }
-                        </div>
-                    )
-                }
+            return <div>
+                {this.props.semiring === "String"
+                    ? <p>A semiring of formal languages. Used in automaton theory. (<a
+                        href="http://www.openfst.org/twiki/pub/FST/FstHltTutorial/tutorial_part1.pdf">An unweighted
+                        functional transducer can be seen as as a weighted automaton over the string semiring.</a>)</p>
+                    : ""}
+                {renderEquations(rig, plusLeft, plusRight, timesLeft, timesRight, (k: string, value: string) => this.changeState(k, value))}
             </div>;
         } catch (e) {
             return <div className="error">
@@ -247,3 +264,249 @@ export class SemiringComponent<T> extends PureComponent<SemiringProps, SemiringS
         }
     }
 }
+
+function newState<T>(k: keyof SemiringState<T>, number: T): Pick<SemiringState<T>, keyof SemiringState<T>> {
+    const s: any = {};
+    s[k] = number;
+    return s as Pick<SemiringState<T>, keyof SemiringState<T>>;
+}
+
+export class ProbabilitySemiringComponent extends PureComponent<{}, SemiringState<number>> {
+    readonly rig: Semiring<number> = FloatingPointSemiring;
+
+    constructor() {
+        super();
+        this.state = initState(this.rig);
+    }
+
+    changeState(k: string, value: string) {
+        try {
+            this.setState(newState(k as keyof SemiringState<number>, (parseFloat(value))));
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+
+    componentDidMount() {
+        this.setState(setInitialCalculations(this.rig));
+    }
+
+    render() {
+        try {
+            return <div>
+                <p>This semiring implements the common notion of calculating probabilties through addition and
+                    multiplication.</p>
+                {renderEquations(FloatingPointSemiring, this.state.plusLeft, this.state.plusRight, this.state.timesLeft, this.state.timesRight, (k: string, value: string) => this.changeState(k, value))}
+            </div>;
+        } catch (e) {
+            return <div className="error">
+                {e.message}
+            </div>;
+        }
+    }
+}
+
+export class LogSemiringComponent extends PureComponent<{}, SemiringState<number>> {
+    readonly rig: Semiring<number> = LogSemiring;
+
+    constructor() {
+        super();
+        this.state = initState(this.rig);
+    }
+
+    changeState(k: string, value: string) {
+        try {
+            this.setState(newState(k as keyof SemiringState<number>, (parseFloat(value))));
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+
+    componentDidMount() {
+        this.setState(setInitialCalculations(this.rig));
+    }
+
+    render() {
+        try {
+            return <div>
+                <p>A semiring usually used for multiplying numbers close to zero, to avoid arithmetic underflow.</p>
+                {renderEquations(this.rig, this.state.plusLeft, this.state.plusRight, this.state.timesLeft, this.state.timesRight, (k: string, value: string) => this.changeState(k, value))}
+            </div>;
+        } catch (e) {
+            return <div className="error">
+                {e.message}
+            </div>;
+        }
+    }
+}
+
+export class TropicalSemiringComponent extends PureComponent<{}, SemiringState<number>> {
+    readonly rig: Semiring<number> = LogSemiring;
+
+    constructor() {
+        super();
+        this.state = {
+            plusLeft: this.rig.multiplicativeIdentity,
+            plusRight: this.rig.additiveIdentity,
+            timesLeft: this.rig.multiplicativeIdentity,
+            timesRight: this.rig.additiveIdentity,
+        };
+    }
+
+    changeState(k: string, value: string) {
+        try {
+            this.setState(newState(k as keyof SemiringState<number>, (parseFloat(value))));
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+
+    componentDidMount() {
+        this.setState(setInitialCalculations(this.rig));
+    }
+
+    render() {
+        try {
+            return <div>
+                <p>A semiring that describes <a href="https://en.wikipedia.org/wiki/Tropical_geometry">Tropical
+                    geometry</a>. An interesting application of this semiring was made by <a
+                    href="https://www.theguardian.com/science/video/2013/jul/12/geometry-banking-crisis-video">Paul
+                    Klemperer for use in auctions during the financial crisis</a>.</p>
+                {renderEquations(this.rig, this.state.plusLeft, this.state.plusRight, this.state.timesLeft, this.state.timesRight, (k: string, value: string) => this.changeState(k, value))}
+            </div>;
+        } catch (e) {
+            return <div className="error">
+                {e.message}
+            </div>;
+        }
+    }
+}
+
+export class StringSemiringComponent extends PureComponent<{}, SemiringState<number>> {
+    readonly rig: Semiring<number> = LogSemiring;
+
+    constructor() {
+        super();
+        this.state = {
+            plusLeft: this.rig.multiplicativeIdentity,
+            plusRight: this.rig.additiveIdentity,
+            timesLeft: this.rig.multiplicativeIdentity,
+            timesRight: this.rig.additiveIdentity,
+        };
+    }
+
+    changeState(k: string, value: string) {
+        try {
+            this.setState(newState(k as keyof SemiringState<number>, (parseFloat(value))));
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+
+    componentDidMount() {
+        this.setState(setInitialCalculations(this.rig));
+    }
+
+    render() {
+        try {
+            return <div>
+                <p>A semiring that describes <a href="https://en.wikipedia.org/wiki/Tropical_geometry">Tropical
+                    geometry</a>. An interesting application of this semiring was made by <a
+                    href="https://www.theguardian.com/science/video/2013/jul/12/geometry-banking-crisis-video">Paul
+                    Klemperer for use in auctions during the financial crisis</a>.</p>
+                {renderEquations(this.rig, this.state.plusLeft, this.state.plusRight, this.state.timesLeft, this.state.timesRight, (k: string, value: string) => this.changeState(k, value))}
+            </div>;
+        } catch (e) {
+            return <div className="error">
+                {e.message}
+            </div>;
+        }
+    }
+}
+
+
+function initState<T>(rig: Semiring<T>) {
+    return {
+        plusLeft: rig.multiplicativeIdentity,
+        plusRight: rig.additiveIdentity,
+        timesLeft: rig.multiplicativeIdentity,
+        timesRight: rig.additiveIdentity,
+    };
+}
+
+export class BooleanSemiringComponent extends PureComponent<{}, SemiringState<boolean>> {
+    readonly rig: Semiring<boolean> = BooleanSemiring;
+
+    constructor() {
+        super();
+        this.state = initState(this.rig);
+    }
+
+    changeState(k: string, value: string) {
+        try {
+            const val = (value.trim().toLowerCase() === "true");
+            this.setState(newState(k as keyof SemiringState<boolean>, val));
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+
+    componentDidMount() {
+        this.setState(setInitialCalculations(this.rig));
+    }
+
+    render() {
+        try {
+            return <div>
+                <p>A semiring that represents Boolean logic: AND, OR, TRUE and FALSE.</p>
+                {renderEquations(this.rig, this.state.plusLeft, this.state.plusRight, this.state.timesLeft, this.state.timesRight, (k: string, value: string) => this.changeState(k, value))}
+            </div>;
+        } catch (e) {
+            return <div className="error">
+                {e.message}
+            </div>;
+        }
+    }
+}
+
+// // TODO
+// export class StringSemiringComponent extends PureComponent<{}, SemiringState<boolean>> {
+//     readonly rig: Semiring<boolean> = BooleanSemiring;
+//
+//     constructor() {
+//         super();
+//         this.state = initState(this.rig);
+//     }
+//
+//     changeState(k: string, value: string) {
+//         try {
+//             const val = (value.trim().toLowerCase() === "true");
+//             this.setState(newState(k as keyof SemiringState<boolean>, val));
+//         } catch (e) {
+//             console.error(e);
+//         }
+//     }
+//
+//
+//     componentDidMount() {
+//         this.setState(setInitialCalculations(this.rig));
+//     }
+//
+//     render() {
+//         try {
+//             return <div>
+//                 <p>A semiring that represents Boolean logic: AND, OR, TRUE and FALSE.</p>
+//                 {renderEquations(this.rig, this.state.plusLeft, this.state.plusRight, this.state.timesLeft, this.state.timesRight, (k: string, value: string) => this.changeState(k, value))}
+//             </div>;
+//         } catch (e) {
+//             return <div className="error">
+//                 {e.message}
+//             </div>;
+//         }
+//     }
+// }

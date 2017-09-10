@@ -197,7 +197,10 @@ a {
     text-decoration: none
 }
 
-a:hover, a:focus {
+.general-semiring-properties {
+}
+
+.title {
     text-decoration: underline
 }
 

@@ -13,7 +13,6 @@ export * from "./semirings/tropical";
 export * from "./semirings/floating-point";
 export * from "./semirings/string";
 
-
 /**
  * Semiring defined on objects of type T.
  *

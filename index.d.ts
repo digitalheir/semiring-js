@@ -1,1 +1,1 @@
-export * from "./ts-compiled/index";
+export * from "./dist";

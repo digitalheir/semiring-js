@@ -12,7 +12,7 @@ import {
     TropicalSemiring
 } from "../src/index";
 import {expect} from "chai";
-import {createStringSemiring, FormalLanguage} from "../src/semirings/string";
+import {createStringSemiring, FormalLanguage} from "../src";
 
 const BooleanExpressionSemiring = makeDeferrable(BooleanSemiring);
 

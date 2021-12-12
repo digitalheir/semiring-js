@@ -14,4 +14,4 @@ export const TropicalSemiring: Semiring<number> = {
     times: ADD
 };
 
-export default TropicalSemiring;
+// export default TropicalSemiring;

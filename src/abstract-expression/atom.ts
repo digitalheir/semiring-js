@@ -27,6 +27,6 @@ export class AtomicValue<T> implements Expression<T> {
         let str = this._value.toString();
         if (radix && isNumber(this._value)) str = this._value.toString(radix);
 
-        return "{" + str + "}";
+        return `{${str}}`;
     }
 }

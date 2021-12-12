@@ -11,8 +11,8 @@ export function AND(x: boolean, y: boolean) {
 }
 
 export const BooleanSemiring: Semiring<boolean> = {
-    additiveIdentity:  false,
-    multiplicativeIdentity:  true,
+    additiveIdentity: false,
+    multiplicativeIdentity: true,
     plus: OR,
     times: AND,
 };

@@ -3,7 +3,7 @@ const fs = require('fs');
 const base = 'dist/';
 const pathPackage = base + "package.json";
 
-const VERSION = require('./version').default;
+const VERSION = "1.3.0";//require('./version').default;
 
 const p = {
     "name": "semiring",
@@ -21,9 +21,8 @@ function writePackageFileInDist() {
     fs.writeFile(pathPackage, JSON.stringify(p, null, 2), "utf8", function (err) {
         if (err) {
             console.error(err);
-        }
-        else {
-            console.log("Written " + pathPackage);
+        } else {
+            console.log(`Written ${pathPackage}`);
         }
     });
 }

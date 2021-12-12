@@ -49,6 +49,7 @@ export function Equals(firstSet: Set<any>, secondSet: Set<any>) {
 
     return sizeOfSecondSet == 0;
 }
+
 export function Product(firstSet: Set<any>, secondSet: Set<any>, combine: (x: any, y: any) => any) {
     const returnSet: Set<any> = new Set();
     firstSet.forEach(function (firstValue) {
